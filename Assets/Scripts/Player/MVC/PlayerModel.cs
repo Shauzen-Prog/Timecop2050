@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerModel : Entity, IObserverPoints, IHittable
+public class PlayerModel : Entity, IObserverPoints
 {
     public static PlayerModel instance;
     private PlayerController _playerController;
@@ -34,6 +34,11 @@ public class PlayerModel : Entity, IObserverPoints, IHittable
         {
             Die();
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(10f);
+        }
     }
 
     public void ReceiveCall(UtilsPoints.Actions action)
@@ -54,13 +59,12 @@ public class PlayerModel : Entity, IObserverPoints, IHittable
 
     public override void TakeDamage(float dmg)
     {
-        if (dmg > 0)
-        {
-            actualHealth -= dmg;
+        if (!(dmg > 0)) return;
+        
+        actualHealth -= dmg;
             
-            if (actualHealth <= 0)
-                Die();
-        }
+        if (actualHealth <= 0)
+            Die();
     }
 
     public Transform GetTrasnform()
