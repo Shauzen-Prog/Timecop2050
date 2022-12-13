@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class PlayerModel : Entity, IObserverPoints
 {
     public static PlayerModel instance;
-    private PlayerController _playerController;
+    public PlayerController _playerController;
     public HealthBarBehaviour _healthBar;
     private PlayerView _playerView;
     public Vector3 offsetPosition;
@@ -15,6 +15,8 @@ public class PlayerModel : Entity, IObserverPoints
         instance = this;
         _playerController = new PlayerController(transform);
         _playerView = new PlayerView(transform, barHealthSlider, offsetPosition);
+
+        _playerController.OnAwake();
     }
     // Start is called before the first frame update
     private void Start()
@@ -26,7 +28,7 @@ public class PlayerModel : Entity, IObserverPoints
 
     private void Update()
     {
-        _playerController.UpdateControllers();
+        _playerController.OnUpdate();
         _playerView.OnUpdate();
         _playerView.OnUpdateChangeHealth(actualHealth / 100);
 
