@@ -15,13 +15,6 @@ public class RestrictLevels : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(JsonManager.instance.data.completeLevel[neededCompletLevel])
-        {
-            levelButton.interactable = true;
-        }
-        else
-        {
-            levelButton.interactable = false;
-        }
+        levelButton.interactable = JsonManager.instance.data.completeLevel[neededCompletLevel];
     }
 }

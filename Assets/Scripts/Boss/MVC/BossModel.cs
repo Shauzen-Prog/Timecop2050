@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class BossModel : Entity, IHittable
+public class BossModel : Entity
 {
     private HealthBarBehaviour _healthBar;
     public Animator anim;
@@ -42,12 +40,12 @@ public class BossModel : Entity, IHittable
     {
         _bossModelView.OnUpdate();
         _bossController.UpdateController();
-        _healthBar.SetHealth(actualHealth, maxHealth);
+        //_healthBar.SetHealth(actualHealth, maxHealth);
     }
 
     public override void TakeDamage(float dmg)
     {
-        if (!(dmg > 0)) return;
+        if (dmg <= 0) return;
         
         actualHealth -= dmg;
         _bossModelView.SetTriggerAnim("TakeDamage");
