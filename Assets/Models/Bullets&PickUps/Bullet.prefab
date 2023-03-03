@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 1
-  bulletMaxDuration: 3
-  speed: 20
+  bulletMaxDuration: 7
+  speed: 50
   bulletDirection: {x: 0, y: 0, z: 1}
   noHittableLayer: 8
   shootSound: {fileID: 8300000, guid: aad41b4bdefee574b9a4aa9b7b3ba400, type: 3}
