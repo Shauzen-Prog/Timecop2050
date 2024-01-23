@@ -8,8 +8,9 @@ public class LanguageManager : MonoBehaviour
 {
     public static LanguageManager instance;
 
+    
     public Language selectedLanguage;
-    public string externalURL = "https://drive.google.com/uc?export=download&id=19NhRbwhZaO9f2SgsxwBa5yecQDZgoRXs";
+    public string externalURL = "https://drive.google.com/uc?export=download&id=129WPbJmgUOntUDbvwH1BE23rccIrG_b7";
 
     Dictionary<Language, Dictionary<string, string>> _languageManager;
 
@@ -24,6 +25,7 @@ public class LanguageManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+        
     }
 
     private void Start()
@@ -54,7 +56,7 @@ public class LanguageManager : MonoBehaviour
         yield return www.SendWebRequest();
 
         _languageManager = LanguageU.LoadCodex(www.downloadHandler.text);
-
+        
         OnUpdate?.Invoke();
 
     }
