@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -7,6 +8,13 @@ public class Translate : MonoBehaviour
 {
     public string ID;
     public TextMeshProUGUI myText;
+
+    private void Awake()
+    {
+        if(myText != null) return;
+        
+        myText = GetComponentInChildren<TextMeshProUGUI>();
+    }
 
     private void Start()
     {
@@ -17,4 +25,5 @@ public class Translate : MonoBehaviour
     {
         myText.text = LanguageManager.instance.GetTranslate(ID);
     }
+    
 }

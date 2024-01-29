@@ -9,42 +9,45 @@ public class MenuLvls : MonoBehaviour
     public GameObject backGround;
     public GameObject credits;
     public GameObject controls;
-
+    
+    private Vector3 makeSmall = new Vector3(0.001f, 0.001f, 0.001f);
+    private Vector3 makeNormalSize = new Vector3(0.3f, 0.3f, 0.3f);
+    
     public void TurnOnLvls()
     {
-        menu.SetActive(false);
-        lvls.SetActive(true);
+        menu.transform.localScale = makeSmall;
+        lvls.transform.localScale = makeNormalSize;
         backGround.SetActive(true);
     }
 
     public void CloseLvls()
     {
-        menu.SetActive(true);
-        lvls.SetActive(false);
+        menu.transform.localScale = makeNormalSize;
+        lvls.transform.localScale = makeSmall;
         backGround.SetActive(false);
     }
 
     public void TurnOnCredits()
     {
-        menu.SetActive(false);
-        credits.SetActive(true);
+        menu.transform.localScale = makeSmall;
+        credits.transform.localScale = makeNormalSize;
     }
 
     public void CloseCredits()
     {
-        menu.SetActive(true);
-        credits.SetActive(false);
+        menu.transform.localScale = makeNormalSize;
+        credits.transform.localScale = makeSmall;
     }
 
     public void TurnOnControls()
     {
-        menu.SetActive(false);
-        controls.SetActive(true);
+        menu.transform.localScale = makeSmall;
+        controls.transform.localScale = makeNormalSize;
     }
 
     public void CloseControls()
     {
-        menu.SetActive(true);
-        controls.SetActive(false);
+        menu.transform.localScale = makeNormalSize;
+        controls.transform.localScale = makeSmall;
     }
 }

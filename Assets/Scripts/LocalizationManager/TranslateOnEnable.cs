@@ -10,8 +10,7 @@ public class TranslateOnEnable : MonoBehaviour
 
     private void OnEnable()
     {
-        myText = GetComponentInChildren<TextMeshProUGUI>();
-        
+        Debug.Log("Here");
         LanguageManager.instance.OnUpdate += ChangeLang;
     }
 
