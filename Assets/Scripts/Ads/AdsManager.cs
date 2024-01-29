@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 using TMPro;
 
-public class AdsManager : MonoBehaviour
+public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
     public string adID = "Rewarded_Android";
     public GameObject Menu;
     public GameObject LoseMenu;
+    private IUnityAdsListener _listener;
 
     public void Start()
     {
+        
+        
         if (Application.platform == RuntimePlatform.WindowsEditor)
         {
             Advertisement.Initialize("4492229", true);
@@ -37,12 +40,16 @@ public class AdsManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-
+        
+        
+        Advertisement.AddListener(_listener);
         ShowOptions options = new ShowOptions();
         options.resultCallback = Result;
 
         Advertisement.Show(adID, options);
     }
+    
+    
 
     void Result(ShowResult _result)
     {
@@ -56,6 +63,53 @@ public class AdsManager : MonoBehaviour
             JsonManager.instance.data.activeAllMenuPowerUps = true;
         }
         else
+        {
+            //Si se saltea el Ad
+
+            Debug.Log("se salteo");
+            LoseMenu.SetActive(false);
+            Menu.SetActive(true);
+
+            int randomPowerUp = Random.Range(1, 4);
+
+            Debug.Log(randomPowerUp);
+
+
+            JsonManager.instance.data.randomPowerUpActive = randomPowerUp;
+
+
+            JsonManager.instance.Save();
+        }
+    }
+
+    public void OnUnityAdsReady(string placementId)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnUnityAdsDidError(string message)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnUnityAdsDidStart(string placementId)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+    {
+        
+        Debug.Log(showResult.ToString());
+        if(showResult == ShowResult.Finished)
+        {
+            //Si se ve el Ad
+            Debug.Log("no se salteo");
+            LoseMenu.SetActive(false);
+            Menu.SetActive(true);
+            JsonManager.instance.data.activeAllMenuPowerUps = true;
+        }
+        else if(showResult == ShowResult.Skipped)
         {
             //Si se saltea el Ad
 
