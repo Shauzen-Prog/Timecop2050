@@ -10,7 +10,7 @@ public class CityMovementManager : MonoBehaviour
         
         if(map == null) return;
         
-        Debug.Log("entre");
+        //Debug.Log("entre");
         
         map.transform.position = _resetPosition;
     }

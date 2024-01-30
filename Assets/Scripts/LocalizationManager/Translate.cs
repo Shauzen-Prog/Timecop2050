@@ -11,13 +11,15 @@ public class Translate : MonoBehaviour
 
     private void Awake()
     {
-        //if(myText != null) return;
-        //
-        //myText = GetComponentInChildren<TextMeshProUGUI>();
+       
     }
 
     private void Start()
     {
+        if (LanguageManager.instance.isReadyToTranslate)
+        {
+            ChangeLang();
+        }
         LanguageManager.instance.OnUpdate += ChangeLang;
     }
 

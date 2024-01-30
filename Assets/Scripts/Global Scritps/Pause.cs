@@ -1,52 +1,51 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
     [SerializeField]
     GameObject pauseMenu;
-    [SerializeField] GameObject optionMenu;
+    public GameObject pauseBackgroundImage;
     private bool isPauseMenuActive;
     //public AudioSource music;
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isPauseMenuActive)
-        {
-            PauseGame();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && isPauseMenuActive)
-        {
-            
-        }
+        isPauseMenuActive = false;
+        Time.timeScale = 1;
     }
 
-    public void PauseGame()
+    private void Update()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPauseMenuActive = !isPauseMenuActive;
+            PauseGame(isPauseMenuActive);
+        }
+        
+    }
+
+    public void PauseGame(bool status)
+    {
+        if (status)
+        {
+            pauseMenu.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            Time.timeScale = 0;
+            pauseBackgroundImage.SetActive(true);   
+        }
+        else
+        {
+            pauseMenu.transform.localScale = Vector3.zero;
+            Time.timeScale = 1;
+            pauseBackgroundImage.SetActive(false);  
+        }
+        
         //music.Stop();
     }
 
-    public void ResumeGame()
+    public void BackToMenu(int sceneToLoad)
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        //music.UnPause();
-    }
-
-    public void OptionsMenu()
-    {
-        optionMenu.SetActive(true);
+        SceneManagement.instance.LoadScene(sceneToLoad);
     }
     
-    public void Home(int ID)
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(ID);
-    }
 }

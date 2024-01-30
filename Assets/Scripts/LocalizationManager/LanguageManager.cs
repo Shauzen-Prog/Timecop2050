@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.PlayerLoop;
 
 public class LanguageManager : MonoBehaviour
 {
     public static LanguageManager instance;
 
-    
+    public bool isReadyToTranslate;
     public Language selectedLanguage;
     public string externalURL = "https://drive.google.com/uc?export=download&id=129WPbJmgUOntUDbvwH1BE23rccIrG_b7";
 
@@ -24,12 +25,16 @@ public class LanguageManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
         else
+        {
             Destroy(gameObject);
+        }
         
     }
-
+    
+    
     private void Start()
     {
+        isReadyToTranslate = false;
         StartCoroutine(DownloadCSV(externalURL));
     }
 
@@ -56,10 +61,12 @@ public class LanguageManager : MonoBehaviour
         yield return www.SendWebRequest();
 
         _languageManager = LanguageU.LoadCodex(www.downloadHandler.text);
-        
+
+        isReadyToTranslate = true;
         OnUpdate?.Invoke();
 
     }
+    
 }
 
 public enum Language
