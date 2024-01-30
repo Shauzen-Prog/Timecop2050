@@ -2,7 +2,8 @@
 
 public class MenuManager : MonoBehaviour
 {
-    [Header("Menus")] public GameObject mainMenu;
+    [Header("Menus")] 
+    public GameObject mainMenu;
     public GameObject levelsMenu;
     public GameObject creditsMenu;
     public GameObject controlsMenu;
