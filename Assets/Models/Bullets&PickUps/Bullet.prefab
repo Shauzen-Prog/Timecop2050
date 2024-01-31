@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 1
-  bulletMaxDuration: 7
+  bulletMaxDuration: 2
   speed: 50
   bulletDirection: {x: 0, y: 0, z: 1}
   noHittableLayer: 8

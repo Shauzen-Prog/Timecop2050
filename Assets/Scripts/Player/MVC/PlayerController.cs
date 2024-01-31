@@ -23,15 +23,18 @@ public class PlayerController
 
     public void OnAwake()
     {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         _ArtificialUpdate = MoveWASDController;
         
         return;
-    #endif
         
-        
+#endif
         _ArtificialUpdate = _dragFingerMove.DragMove;
+        ChangeController(TypeOfController.DragMove);
+   
+        
+        
     }
     
     public void OnUpdate()
