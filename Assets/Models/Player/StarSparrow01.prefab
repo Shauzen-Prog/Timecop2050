@@ -649,6 +649,10 @@ MonoBehaviour:
   actualHealth: 100
   offsetPosition: {x: 0, y: 0, z: 0}
   barHealthSlider: {fileID: 1549379832}
+  minClampX: 4.8
+  maxClampX: 26.7
+  minClampZ: 57.6
+  maxClampZ: 112.7
 --- !u!95 &1756021682
 Animator:
   serializedVersion: 3

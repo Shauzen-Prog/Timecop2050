@@ -128,7 +128,7 @@ MonoBehaviour:
   bulletDamage: 1
   bulletMaxDuration: 2
   speed: 50
-  bulletDirection: {x: 0, y: 0, z: 1}
+  bulletDirection: {x: 0, y: 1, z: 0}
   noHittableLayer: 8
   shootSound: {fileID: 8300000, guid: aad41b4bdefee574b9a4aa9b7b3ba400, type: 3}
   changeColorPowerUpDamage: {fileID: 2100000, guid: 8ff62df93ca4a764bb79ba7f9011ccac,

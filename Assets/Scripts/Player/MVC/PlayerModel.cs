@@ -6,14 +6,22 @@ public class PlayerModel : Entity, IObserverPoints
     public static PlayerModel instance;
     public PlayerController _playerController;
     public HealthBarBehaviour _healthBar;
+    public Rigidbody _rigidbody;
     private PlayerView _playerView;
     public Vector3 offsetPosition;
     public Slider barHealthSlider;
+    
+    [Header("Clamp Controller Value")]
+    public float minClampX; 
+    public float maxClampX; 
+    public float minClampY; 
+    public float maxClampY;
 
     private void Awake()
     {
+        _rigidbody = GetComponent<Rigidbody>();
         instance = this;
-        _playerController = new PlayerController(transform);
+        _playerController = new PlayerController(transform ,minClampX, maxClampX, minClampY, maxClampY);
         _playerView = new PlayerView(transform, barHealthSlider, offsetPosition);
 
         _playerController.OnAwake();
