@@ -1,26 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class FPSInScreen : MonoBehaviour
 {
     private int _lastFrameIndex;
-    private float[] frameDeltaTimeArray;
+    private float[] _frameDeltaTimeArray;
     private TextMeshProUGUI _fpsCounter;
 
     private void Awake()
     {
-        frameDeltaTimeArray = new float[50];
+        _frameDeltaTimeArray = new float[50];
         _fpsCounter = GetComponent<TextMeshProUGUI>();
     }
     
     // Update is called once per frame
     void Update()
     {
-        frameDeltaTimeArray[_lastFrameIndex] = Time.unscaledDeltaTime;
-        _lastFrameIndex = (_lastFrameIndex + 1) % frameDeltaTimeArray.Length;
+        _frameDeltaTimeArray[_lastFrameIndex] = Time.unscaledDeltaTime;
+        _lastFrameIndex = (_lastFrameIndex + 1) % _frameDeltaTimeArray.Length;
 
         _fpsCounter.text = "FPS: " + Mathf.RoundToInt(CalculateFPS());
     }
@@ -29,12 +26,12 @@ public class FPSInScreen : MonoBehaviour
     {
         var total = 0f;
         var index = 0;
-        for (; index < frameDeltaTimeArray.Length; index++)
+        for (; index < _frameDeltaTimeArray.Length; index++)
         {
-            var deltaTime = frameDeltaTimeArray[index];
+            var deltaTime = _frameDeltaTimeArray[index];
             total += deltaTime;
         }
 
-        return frameDeltaTimeArray.Length / total;
+        return _frameDeltaTimeArray.Length / total;
     }
 }

@@ -27,11 +27,10 @@ public class PlayerController
 
         _ArtificialUpdate = MoveWASDController;
         
-        return;
-        
-#endif
+#elif UNITY_ANDROID
         _ArtificialUpdate = _dragFingerMove.DragMove;
         ChangeController(TypeOfController.DragMove);
+#endif
    
         
         
