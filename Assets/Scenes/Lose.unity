@@ -192,6 +192,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92e3304fa6e8e104b835e4f58906e4a7, type: 3}
+--- !u!1001 &316227025
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 685.06464
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 774.0067
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1388.6631
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804647, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695066022665804649, guid: 5326e0cba3d3b674b8074cba3ac72527,
+        type: 3}
+      propertyPath: m_Name
+      value: JsonManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5326e0cba3d3b674b8074cba3ac72527, type: 3}
 --- !u!1 &334611003
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,8 +495,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1222493677}
-        m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
+      - m_Target: {fileID: 1944845927}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: LoadLastScene
         m_Mode: 1
         m_Arguments:
@@ -1095,8 +1164,8 @@ MonoBehaviour:
           m_StringArgument: DamageUp
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1222493677}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1944845927}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: LoadLastScene
         m_Mode: 1
         m_Arguments:
@@ -1566,8 +1635,8 @@ MonoBehaviour:
           m_StringArgument: None
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1222493677}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1944845927}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: LoadLastScene
         m_Mode: 1
         m_Arguments:
@@ -2459,8 +2528,8 @@ MonoBehaviour:
           m_StringArgument: SpeedShotUp
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1222493677}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1944845927}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: LoadLastScene
         m_Mode: 1
         m_Arguments:
@@ -3100,6 +3169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1944845926}
   - component: {fileID: 1944845925}
+  - component: {fileID: 1944845927}
   m_Layer: 0
   m_Name: Menu Manager
   m_TagString: Untagged
@@ -3136,6 +3206,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1944845927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944845924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598422a3cbc96874783ed2752a1264eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1974144972
 GameObject:
   m_ObjectHideFlags: 0
@@ -3220,8 +3302,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1222493677}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1944845927}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 3
         m_Arguments:

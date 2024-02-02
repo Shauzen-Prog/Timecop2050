@@ -43,7 +43,7 @@ public class LanguageU
             }
             catch (Exception e)
             {
-                Debug.LogError(e);
+                
                 continue;
             }
 
