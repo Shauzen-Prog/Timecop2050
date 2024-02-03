@@ -7,9 +7,9 @@ public class HealthBarBehaviour
     private Slider _sliderBar;
     private Vector3 _offset;
 
-    public HealthBarBehaviour(Transform userTrasnform ,Slider sliderBar, Vector3 offset)
+    public HealthBarBehaviour(Transform userTransform ,Slider sliderBar, Vector3 offset)
     {
-        _userTransform = userTrasnform;
+        _userTransform = userTransform;
         _sliderBar = sliderBar;
         _offset = offset;
     }

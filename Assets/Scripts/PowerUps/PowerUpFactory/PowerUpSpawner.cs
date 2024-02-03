@@ -33,8 +33,6 @@ public class PowerUpSpawner : MonoBehaviour
 
         var speedUpPowerUp = _powerUpFactory.Create("BulletSpeedUp");
         
-        Debug.Log(speedUpPowerUp);
-
         speedUpPowerUp.transform.position += transform.up * 2 * Time.deltaTime;
 
     }
@@ -53,7 +51,6 @@ public class PowerUpSpawner : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
                 extrapowerupCount++;
             }
-
         }
 
         if(JsonManager.instance.data.startingPowerUp == "DamageUp")

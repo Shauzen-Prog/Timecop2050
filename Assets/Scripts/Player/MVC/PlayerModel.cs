@@ -5,11 +5,10 @@ public class PlayerModel : Entity, IObserverPoints
 {
     public static PlayerModel instance;
     public PlayerController _playerController;
-    public HealthBarBehaviour _healthBar;
-    public Rigidbody _rigidbody;
     private PlayerView _playerView;
     public Vector3 offsetPosition;
     public Slider barHealthSlider;
+    private Animator _anim;
     
     [Header("Clamp Controller Value")]
     public float minClampX; 
@@ -19,11 +18,13 @@ public class PlayerModel : Entity, IObserverPoints
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
         instance = this;
-        _playerController = new PlayerController(transform ,minClampX, maxClampX, minClampY, maxClampY);
-        _playerView = new PlayerView(transform, barHealthSlider, offsetPosition);
-
+        _anim = GetComponent<Animator>();
+        EventManager.Trigger("UpPlayerController",transform ,minClampX, maxClampX, minClampY, maxClampY);
+        //_playerController = new PlayerController(transform ,minClampX, maxClampX, minClampY, maxClampY);
+        _playerView = new PlayerView(transform, barHealthSlider, offsetPosition, _anim, actualHealth, maxHealth);
+        
+        
         _playerController.OnAwake();
     }
     // Start is called before the first frame update
@@ -36,9 +37,8 @@ public class PlayerModel : Entity, IObserverPoints
 
     private void Update()
     {
-        _playerController.OnUpdate();
-        _playerView.OnUpdate();
-        _playerView.OnUpdateChangeHealth(actualHealth / 100);
+        
+        EventManager.Trigger("UpdateControllers");
 
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -50,15 +50,7 @@ public class PlayerModel : Entity, IObserverPoints
             TakeDamage(10f);
         }
     }
-
-    public void ReceiveCall(UtilsPoints.Actions action)
-    {
-        if (action == UtilsPoints.Actions.CompleteChargePoints)
-            Debug.Log("PowerUp");
-        else
-            Debug.Log("Lost PowerUp");
-    }
-
+    
     public override void Die()
     {
         gameObject.SetActive(false);
@@ -72,12 +64,35 @@ public class PlayerModel : Entity, IObserverPoints
         if (!(dmg > 0)) return;
         
         actualHealth -= dmg;
-            
-        if (actualHealth <= 0)
-            Die();
+        
+        EventManager.Trigger("ChangeHealthPlayer", actualHealth);
+        EventManager.Trigger("TriggerAnimPlayer", "TakeDamage");
+        
+        if (!(actualHealth <= 0)) return;
+        
+        EventManager.Trigger("TriggerAnimPlayer", "Die");
+        Die();
     }
 
-    public Transform GetTrasnform()
+    public override void Heal(float healAmount)
+    {
+        if(actualHealth >= maxHealth) return;
+
+        actualHealth += healAmount;
+        EventManager.Trigger("ChangeHealthPlayer", actualHealth);
+        EventManager.Trigger("TriggerAnimPlayer", "HealAnim");
+    }
+
+
+    public void ReceiveCall(UtilsPoints.Actions action)
+    {
+        if (action == UtilsPoints.Actions.CompleteChargePoints)
+            Debug.Log("PowerUp");
+        else
+            Debug.Log("Lost PowerUp");
+    }
+
+    public Transform GetTransform()
     {
         return transform;
     }

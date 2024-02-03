@@ -19,11 +19,11 @@ public abstract class Entity : MonoBehaviour, IHittable
             Die();
     }
    
-    public void Heal(float heal)
+    public virtual void Heal(float healAmount)
     {
-        if(heal <= 0) return;
+        if(healAmount <= 0) return;
         
-        actualHealth += heal;
+        actualHealth += healAmount;
         
         if (actualHealth >= maxHealth)
             actualHealth = maxHealth;

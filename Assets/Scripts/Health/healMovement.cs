@@ -5,30 +5,33 @@ using UnityEngine;
 public class healMovement : MonoBehaviour
 {
     public GameObject HealObject;
-    int xPos;
-    int yPos;
-    public int Healcount;
+    float xPos;
+    float yPos;
+    private int _healcount;
+    public int amountInTotal;
+    public float timeBetweenDrop;
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("sdasdad");
         StartCoroutine(HealDrop());
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     IEnumerator HealDrop()
     {
-        while (Healcount < 10)
+        while (_healcount < 10)
         {
-            xPos = Random.Range(-13, 14);
-            yPos = 28;
-            Instantiate(HealObject, new Vector3(xPos, yPos, 0f), Quaternion.identity);
-            yield return new WaitForSeconds(15f);
-            Healcount++;
+            xPos = Random.Range(3f, 27f);
+            yPos = 50f;
+            Instantiate(HealObject, new Vector3(xPos, yPos, -40f), Quaternion.identity);
+            yield return new WaitForSeconds(timeBetweenDrop);
+            _healcount++;
         }
     }
 }

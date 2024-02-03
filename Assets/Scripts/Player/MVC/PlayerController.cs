@@ -9,7 +9,7 @@ public enum TypeOfController
     NoControls
 }
 
-public class PlayerController
+public class PlayerController : MonoBehaviour
 {
     private Transform _playerTransform;
     private DragFingerMove _dragFingerMove;
@@ -36,11 +36,16 @@ public class PlayerController
         _minClampY = minClampY;
         _maxClampY = maxClampY;
     }
-    
+
+    private void Awake()
+    {
+       //EventManager.Suscribe("UpPlayerController", );
+    }
+
     public void OnAwake()
     {
 #if UNITY_EDITOR
-
+        
         ChangeController(TypeOfController.MoveWASD);
         
 #elif UNITY_ANDROID
@@ -58,6 +63,11 @@ public class PlayerController
         float clampPositionY = Mathf.Clamp(_playerTransform.position.y, _minClampY, _maxClampY);
         Vector3 clampPositionVector = new Vector3(clampPositionX, clampPositionY, 0f);
         return clampPositionVector;
+    }
+
+    public void OnUpdateTrigger(params object[] parameters)
+    {
+        OnUpdate();
     }
     
     public void OnUpdate()
@@ -97,10 +107,18 @@ public class PlayerController
     {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
+        
+        if (horizontal != 0 || vertical != 0)
+        {
+            EventManager.Trigger("Moverse");
+        }
+        
 
         var _moveVector = new Vector3(horizontal, vertical, 0);
         
         _playerTransform.position += _moveVector * (20 * Time.deltaTime);
+        
+        
     }
         
     #endif

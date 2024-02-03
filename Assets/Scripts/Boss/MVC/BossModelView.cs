@@ -10,18 +10,25 @@ public class BossModelView
     private Slider _sliderBar;
     private Vector3 _offset;
 
-    public BossModelView(Animator anim ,Transform userTrasnform, Slider sliderBar, Vector3 offset)
+    public BossModelView(Animator anim ,Transform userTransform, Slider sliderBar, Vector3 offset)
     {
         _anim = anim;
-        _userTransform = userTrasnform;
+        _userTransform = userTransform;
         _sliderBar = sliderBar;
         _offset = offset;
     }
-    public void ChangeHealth(float health, float maxHealth)
+
+    public void OnStart()
     {
-        _sliderBar.gameObject.SetActive(health < maxHealth);
-        _sliderBar.value = health;
-        _sliderBar.maxValue = maxHealth;
+        EventManager.Suscribe("ChangeHealthBoss",ChangeHealth);
+        EventManager.Suscribe("TriggerAnimBoss",TriggerAnim);
+    }
+    
+    private void ChangeHealth(params object[] parameters)
+    {
+        var health = (float)parameters[0];
+        
+        _sliderBar.value = health / 100f;
     }
 
     public void OnUpdateChangeTransformPosition()
@@ -34,8 +41,16 @@ public class BossModelView
         OnUpdateChangeTransformPosition();
     }
 
-    public void SetTriggerAnim(string triggerAnim)
+    private void TriggerAnim(params object[] parameters)
     {
+        var triggerAnim = (string)parameters[0];
+        
         _anim.SetTrigger(triggerAnim);
+    }
+
+    public void OnDisable()
+    {
+        EventManager.UnSuscribe("ChangeHealthBoss",ChangeHealth);
+        EventManager.UnSuscribe("TriggerAnimBoss",TriggerAnim);
     }
 }

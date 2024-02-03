@@ -30,7 +30,7 @@ public class EnemyChase : Entity
 
     private Vector3 Seek()
     {
-        _target = PlayerModel.instance.GetTrasnform();
+        _target = PlayerModel.instance.GetTransform();
         var desired = _target.transform.position - transform.position;
         desired.Normalize();
         desired *= maxSpeed;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class BossModel : Entity
@@ -6,7 +7,7 @@ public class BossModel : Entity
     private HealthBarBehaviour _healthBar;
     public Animator anim;
     public Slider bossSlider;
-    [SerializeField] private Vector3 offsetPosition;
+    [SerializeField] private Vector3 _offsetPosition;
     private BossModelView _bossModelView;
     private BossController _bossController;
 
@@ -30,8 +31,12 @@ public class BossModel : Entity
     // Start is called before the first frame update
     void Start()
     {
-        _bossModelView = new BossModelView(anim ,transform, bossSlider, offsetPosition);
-        _bossController = new BossController(transform, waypoints, _rb, speed, _curWaypoint, _patrol, _moveDirection, _velocity);
+        var transform1 = transform;
+        _bossModelView = new BossModelView(anim ,transform1, bossSlider, _offsetPosition);
+        _bossController = new BossController(transform1, waypoints, _rb, speed, _curWaypoint, _patrol, _moveDirection, _velocity);
+        
+        _bossModelView.OnStart();
+        
         actualHealth = maxHealth;
         SoundManager.instance.Play(TypesSFX.Second, floatSound);
     }
@@ -48,12 +53,22 @@ public class BossModel : Entity
         if (dmg <= 0) return;
         
         actualHealth -= dmg;
-        _bossModelView.SetTriggerAnim("TakeDamage");
-        _bossModelView.ChangeHealth(actualHealth, maxHealth);
-        if (actualHealth <= 0)
-        {
-            _bossModelView.SetTriggerAnim("Die");
-        }
+        EventManager.Trigger("ChangeHealthBoss", actualHealth);
+        EventManager.Trigger("TriggerAnimBoss", "TakeDamage");
+
+        if (!(actualHealth <= 0)) return;
+        
+        EventManager.Trigger("TriggerAnimBoss", "Die");
+    }
+
+    public override void Heal(float healAmount)
+    {
+        if(actualHealth >= maxHealth) return;
+
+        actualHealth += healAmount;
+        EventManager.Trigger("ChangeHealthBoss", actualHealth);
+        EventManager.Trigger("TriggerAnimBoss", "HealAnim");
+        
     }
     public override void Die()
     {
@@ -62,4 +77,8 @@ public class BossModel : Entity
         base.Die();
     }
 
+    private void OnDisable()
+    {
+        _bossModelView.OnDisable();
+    }
 }
