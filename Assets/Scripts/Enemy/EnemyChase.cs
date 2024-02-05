@@ -60,7 +60,8 @@ public class EnemyChase : Entity
         
         if (hittablegameObject != null && other.gameObject.layer != enemyLayerMask && player != null)
         {
-            hittablegameObject.TakeDamage(damage);
+            EventManager.Trigger("TakeDamage", this);
+            hittablegameObject.TakeDamage(damage, this);
             SpawnHeal();
             Die();
         }

@@ -9,7 +9,7 @@ public enum TypeOfController
     NoControls
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerController
 {
     private Transform _playerTransform;
     private DragFingerMove _dragFingerMove;

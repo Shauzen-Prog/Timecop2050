@@ -9,7 +9,7 @@ public class DamageUpPowerUp : PowerUp
 
     private void Update()
     {
-        transform.position += -transform.up * speed * Time.deltaTime;
+        transform.position += -transform.up * (speed * Time.deltaTime);
     }
 
     public int ReturnDamageNewValue()

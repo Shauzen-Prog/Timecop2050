@@ -48,7 +48,7 @@ public class BossModel : Entity
         //_healthBar.SetHealth(actualHealth, maxHealth);
     }
 
-    public override void TakeDamage(float dmg)
+    public override void TakeDamage(float dmg, Entity objective)
     {
         if (dmg <= 0) return;
         

@@ -8,7 +8,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject creditsMenu;
     public GameObject controlsMenu;
 
-    [Header("Others Variables")] public GameObject backGroundLevelsImage;
+    [Header("Others Variables")] 
+    public GameObject backGroundLevelsImage;
     private Vector3 makeSmall = Vector3.zero;
     private Vector3 makeNormalSize = new Vector3(0.3f, 0.3f, 0.3f);
 

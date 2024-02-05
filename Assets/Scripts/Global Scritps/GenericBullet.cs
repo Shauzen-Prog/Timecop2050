@@ -41,7 +41,7 @@ public abstract class GenericBullet : MonoBehaviour
 
     public virtual void MoveBullet()
     {
-        transform.position += bulletDirection * speed * Time.deltaTime;  
+        transform.position += bulletDirection * (speed * Time.deltaTime);  
     }
 
     public virtual void ReturnBulletToPool()
@@ -54,7 +54,7 @@ public abstract class GenericBullet : MonoBehaviour
 
         if (other.gameObject.layer != noHittableLayer)
         {
-            hittedgameObject?.TakeDamage(bulletDamage);
+            hittedgameObject?.TakeDamage(bulletDamage, null);
             ReturnBulletToPool();
         }
     }

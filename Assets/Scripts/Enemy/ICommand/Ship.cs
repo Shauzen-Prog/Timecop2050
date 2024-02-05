@@ -48,7 +48,7 @@ public class Ship : MonoBehaviour, IHittable
     private void Update()
     {
         transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
-        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position += transform.forward * (speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,5 +90,10 @@ public class Ship : MonoBehaviour, IHittable
     {
         SoundManager.instance.Play(TypesSFX.Second, dieSound);
         Destroy(gameObject);
+    }
+
+    public void TakeDamage(float dmg, Entity entity)
+    {
+        throw new NotImplementedException();
     }
 }

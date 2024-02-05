@@ -13,7 +13,7 @@ public class PlayerBullet : GenericBullet
 
         if (hittedgameObject != null)
         {
-            hittedgameObject.TakeDamage(bulletDamage);
+            hittedgameObject.TakeDamage(bulletDamage, null);
             ReturnBulletToPool();
         }
 

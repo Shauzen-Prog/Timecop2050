@@ -20,8 +20,8 @@ public class PlayerModel : Entity, IObserverPoints
     {
         instance = this;
         _anim = GetComponent<Animator>();
-        EventManager.Trigger("UpPlayerController",transform ,minClampX, maxClampX, minClampY, maxClampY);
-        //_playerController = new PlayerController(transform ,minClampX, maxClampX, minClampY, maxClampY);
+        //EventManager.Trigger("UpPlayerController",transform ,minClampX, maxClampX, minClampY, maxClampY);
+        _playerController = new PlayerController(transform ,minClampX, maxClampX, minClampY, maxClampY);
         _playerView = new PlayerView(transform, barHealthSlider, offsetPosition, _anim, actualHealth, maxHealth);
         
         
@@ -37,6 +37,7 @@ public class PlayerModel : Entity, IObserverPoints
 
     private void Update()
     {
+        _playerController.OnUpdate();
         
         EventManager.Trigger("UpdateControllers");
 
