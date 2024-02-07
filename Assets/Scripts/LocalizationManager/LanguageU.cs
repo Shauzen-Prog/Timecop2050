@@ -43,7 +43,6 @@ public class LanguageU
             }
             catch (Exception e)
             {
-                
                 continue;
             }
 

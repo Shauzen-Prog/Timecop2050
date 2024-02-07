@@ -5,21 +5,14 @@ public abstract class Entity : MonoBehaviour, IHittable
 {
     public float maxHealth;
     public float actualHealth;
-
-    private Entity ToMakeDamage;
     
     private void Start()
     {
         actualHealth = maxHealth;
-        EventManager.Suscribe("TakeDamage", TakeDamageTo);
     }
-    public virtual void TakeDamage(float dmg, Entity objective)
+    public virtual void TakeDamage(float dmg)
     {
         if(dmg <= 0) return;
-        
-        Debug.Log(objective);
-        
-        if (ToMakeDamage == null || ToMakeDamage != objective) return;
         
         actualHealth -= dmg;
         
@@ -38,29 +31,11 @@ public abstract class Entity : MonoBehaviour, IHittable
         if (actualHealth >= maxHealth)
             actualHealth = maxHealth;
     }
-
-    private void TakeDamageTo(params object[] parameters)
-    {
-        ToMakeDamage = (Entity)parameters[0];
-        
-        
-        
-    }
     
     
     public virtual void Die()
     {
         Destroy(gameObject);
     }
-
-
-    public virtual void TakeDamage(float dmg)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void OnDisable()
-    {
-        EventManager.UnSuscribe("TakeDamage", TakeDamageTo);
-    }
+    
 }

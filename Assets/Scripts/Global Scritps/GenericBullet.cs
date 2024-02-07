@@ -54,7 +54,7 @@ public abstract class GenericBullet : MonoBehaviour
 
         if (other.gameObject.layer != noHittableLayer)
         {
-            hittedgameObject?.TakeDamage(bulletDamage, null);
+            hittedgameObject?.TakeDamage(bulletDamage);
             ReturnBulletToPool();
         }
     }

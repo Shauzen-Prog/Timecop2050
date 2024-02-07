@@ -37,16 +37,12 @@ public class PlayerController
         _maxClampY = maxClampY;
     }
 
-    private void Awake()
-    {
-       //EventManager.Suscribe("UpPlayerController", );
-    }
-
+    
     public void OnAwake()
     {
 #if UNITY_EDITOR
         
-        ChangeController(TypeOfController.MoveWASD);
+        _ArtificialUpdate = MoveWASDController;
         
 #elif UNITY_ANDROID
         //_ArtificialUpdate = DragMove;
@@ -61,14 +57,10 @@ public class PlayerController
     {
         float clampPositionX = Mathf.Clamp(_playerTransform.position.x, _minClampX, _maxClampX);
         float clampPositionY = Mathf.Clamp(_playerTransform.position.y, _minClampY, _maxClampY);
-        Vector3 clampPositionVector = new Vector3(clampPositionX, clampPositionY, 0f);
+        Vector3 clampPositionVector = new Vector3(clampPositionX, clampPositionY, -40f);
         return clampPositionVector;
     }
 
-    public void OnUpdateTrigger(params object[] parameters)
-    {
-        OnUpdate();
-    }
     
     public void OnUpdate()
     {
@@ -80,9 +72,6 @@ public class PlayerController
     {
         switch(typeOfController)
         {
-            case TypeOfController.MoveWASD:
-                _ArtificialUpdate = MoveWASDController;
-                break;
             case TypeOfController.DragMove:
                 _ArtificialUpdate = DragMove;
                 break;
@@ -108,16 +97,9 @@ public class PlayerController
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
         
-        if (horizontal != 0 || vertical != 0)
-        {
-            EventManager.Trigger("Moverse");
-        }
-        
-
         var _moveVector = new Vector3(horizontal, vertical, 0);
         
         _playerTransform.position += _moveVector * (20 * Time.deltaTime);
-        
         
     }
         

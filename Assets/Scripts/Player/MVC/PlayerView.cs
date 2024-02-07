@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerView
@@ -34,7 +32,7 @@ public class PlayerView
 
     public void OnUpdateChangeTransformPosition()
     {
-        //_sliderBar.transform.position = Camera.main.WorldToScreenPoint(_userTransform.parent.position + _offset);
+        _sliderBar.transform.position = Camera.main.WorldToScreenPoint(_playerTransform.position + _offSetPosition);
     }
 
     private void UpdateHealBar(params object[] parameters)

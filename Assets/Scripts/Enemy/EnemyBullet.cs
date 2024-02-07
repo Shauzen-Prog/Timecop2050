@@ -7,7 +7,7 @@ public class EnemyBullet : GenericBullet
         var hittableGameObject = other.GetComponent<IHittable>();
 
         if (hittableGameObject == null || other.gameObject.layer == 9) return;
-        hittableGameObject.TakeDamage(bulletDamage, null);
+        hittableGameObject.TakeDamage(bulletDamage);
         ReturnBulletToPool();
     }
 }

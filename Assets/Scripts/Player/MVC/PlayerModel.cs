@@ -20,10 +20,8 @@ public class PlayerModel : Entity, IObserverPoints
     {
         instance = this;
         _anim = GetComponent<Animator>();
-        //EventManager.Trigger("UpPlayerController",transform ,minClampX, maxClampX, minClampY, maxClampY);
         _playerController = new PlayerController(transform ,minClampX, maxClampX, minClampY, maxClampY);
         _playerView = new PlayerView(transform, barHealthSlider, offsetPosition, _anim, actualHealth, maxHealth);
-        
         
         _playerController.OnAwake();
     }
@@ -38,9 +36,10 @@ public class PlayerModel : Entity, IObserverPoints
     private void Update()
     {
         _playerController.OnUpdate();
+       
         
-        EventManager.Trigger("UpdateControllers");
-
+#if UNITY_EDITOR
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
             Die();
@@ -50,6 +49,7 @@ public class PlayerModel : Entity, IObserverPoints
         {
             TakeDamage(10f);
         }
+#endif
     }
     
     public override void Die()

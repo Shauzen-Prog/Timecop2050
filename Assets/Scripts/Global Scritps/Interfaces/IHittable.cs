@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHittable
 {
-    void TakeDamage(float dmg, Entity entity);
+    void TakeDamage(float dmg);
 }
