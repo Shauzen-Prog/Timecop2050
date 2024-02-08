@@ -213,8 +213,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1312992212}
-        m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
+      - m_Target: {fileID: 2089237302}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 3
         m_Arguments:

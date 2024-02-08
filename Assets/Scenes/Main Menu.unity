@@ -148,7 +148,7 @@ RectTransform:
   m_GameObject: {fileID: 40716503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 748884544}
   - {fileID: 73434653}
@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 73434656}
   - component: {fileID: 73434655}
   - component: {fileID: 73434654}
+  - component: {fileID: 73434659}
   m_Layer: 5
   m_Name: Level 2
   m_TagString: Untagged
@@ -287,6 +288,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 73434659}
+        m_TargetAssemblyTypeName: UnityEngine.Analytics.AnalyticsEventTracker, Unity.Analytics.Tracker
+        m_MethodName: TriggerEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &73434657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +338,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73434652}
   m_CullTransparentMesh: 0
+--- !u!114 &73434659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73434652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -745406591, guid: 220224b43fc464c28bc0e8de8f54a432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Trigger:
+    m_IsTriggerExpanded: 1
+    m_Type: 1
+    m_LifecycleEvent: 0
+    m_ApplyRules: 0
+    m_Rules:
+      m_Rules: []
+    m_TriggerBool: 0
+    m_InitTime: 5
+    m_RepeatTime: 5
+    m_Repetitions: 0
+    repetitionCount: 0
+  m_EventPayload:
+    m_IsEventExpanded: 1
+    m_StandardEventType: CustomEvent
+    m_Parameters:
+      m_Parameters: []
+    m_Name: LevelToPlay
 --- !u!1 &117593833
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,6 +1000,7 @@ GameObject:
   - component: {fileID: 748884547}
   - component: {fileID: 748884546}
   - component: {fileID: 748884545}
+  - component: {fileID: 748884549}
   m_Layer: 5
   m_Name: Level 1
   m_TagString: Untagged
@@ -1054,6 +1098,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 748884549}
+        m_TargetAssemblyTypeName: UnityEngine.Analytics.AnalyticsEventTracker, Unity.Analytics.Tracker
+        m_MethodName: TriggerEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &748884547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,6 +1148,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748884543}
   m_CullTransparentMesh: 0
+--- !u!114 &748884549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748884543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -745406591, guid: 220224b43fc464c28bc0e8de8f54a432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Trigger:
+    m_IsTriggerExpanded: 1
+    m_Type: 1
+    m_LifecycleEvent: 0
+    m_ApplyRules: 0
+    m_Rules:
+      m_Rules:
+      - m_Target:
+          m_Target: {fileID: 0}
+          m_Path: 
+          m_ValidTypeNames: []
+          m_Type: 
+          m_EnumType: 
+        m_Operator: 0
+        m_Value:
+          m_EditingCustomValue: 0
+          m_PopupIndex: 0
+          m_CustomValue: 
+          m_FixedType: 0
+          m_EnumType: 
+          m_EnumTypeIsCustomizable: 0
+          m_CanDisable: 0
+          m_PropertyType: 1
+          m_ValueType: System.String
+          m_Value: 
+          m_Target:
+            m_Target: {fileID: 0}
+            m_Path: 
+            m_ValidTypeNames:
+            - System.Int32
+            - System.Boolean
+            - System.Decimal
+            - System.Double
+            - System.Single
+            - System.Int64
+            - System.Int16
+            - System.String
+            m_Type: System.String
+            m_EnumType: 
+        m_Value2:
+          m_EditingCustomValue: 0
+          m_PopupIndex: 0
+          m_CustomValue: 
+          m_FixedType: 0
+          m_EnumType: 
+          m_EnumTypeIsCustomizable: 0
+          m_CanDisable: 0
+          m_PropertyType: 0
+          m_ValueType: 
+          m_Value: 
+          m_Target:
+            m_Target: {fileID: 0}
+            m_Path: 
+            m_ValidTypeNames: []
+            m_Type: 
+            m_EnumType: 
+    m_TriggerBool: 0
+    m_InitTime: 5
+    m_RepeatTime: 5
+    m_Repetitions: 0
+    repetitionCount: 0
+  m_EventPayload:
+    m_IsEventExpanded: 1
+    m_StandardEventType: CustomEvent
+    m_Parameters:
+      m_Parameters: []
+    m_Name: LevelToPlay
 --- !u!1 &751756316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,7 +1674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &896182864
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2801,6 +2936,7 @@ GameObject:
   - component: {fileID: 1339837932}
   - component: {fileID: 1339837931}
   - component: {fileID: 1339837930}
+  - component: {fileID: 1339837935}
   m_Layer: 5
   m_Name: Level 3
   m_TagString: Untagged
@@ -2912,6 +3048,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1339837935}
+        m_TargetAssemblyTypeName: UnityEngine.Analytics.AnalyticsEventTracker, Unity.Analytics.Tracker
+        m_MethodName: TriggerEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1339837933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2950,6 +3098,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339837928}
   m_CullTransparentMesh: 0
+--- !u!114 &1339837935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339837928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -745406591, guid: 220224b43fc464c28bc0e8de8f54a432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Trigger:
+    m_IsTriggerExpanded: 1
+    m_Type: 1
+    m_LifecycleEvent: 0
+    m_ApplyRules: 0
+    m_Rules:
+      m_Rules: []
+    m_TriggerBool: 0
+    m_InitTime: 5
+    m_RepeatTime: 5
+    m_Repetitions: 0
+    repetitionCount: 0
+  m_EventPayload:
+    m_IsEventExpanded: 1
+    m_StandardEventType: CustomEvent
+    m_Parameters:
+      m_Parameters: []
+    m_Name: LevelToPlay
 --- !u!1 &1385970220
 GameObject:
   m_ObjectHideFlags: 0
@@ -4807,6 +4985,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4535935944712949889}
+        m_TargetAssemblyTypeName: UnityEngine.Analytics.AnalyticsEventTracker, Unity.Analytics.Tracker
+        m_MethodName: TriggerEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &4535935944712949883
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4848,6 +5038,7 @@ GameObject:
   - component: {fileID: 4535935944712949880}
   - component: {fileID: 4535935944712949888}
   - component: {fileID: 4535935944712949881}
+  - component: {fileID: 4535935944712949889}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -4869,6 +5060,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: ID_Play
   myText: {fileID: 4535935946284663688}
+--- !u!114 &4535935944712949889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535935944712949887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -745406591, guid: 220224b43fc464c28bc0e8de8f54a432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Trigger:
+    m_IsTriggerExpanded: 1
+    m_Type: 1
+    m_LifecycleEvent: 1
+    m_ApplyRules: 0
+    m_Rules:
+      m_Rules: []
+    m_TriggerBool: 0
+    m_InitTime: 5
+    m_RepeatTime: 5
+    m_Repetitions: 0
+    repetitionCount: 0
+  m_EventPayload:
+    m_IsEventExpanded: 1
+    m_StandardEventType: GameStart
+    m_Parameters:
+      m_Parameters: []
+    m_Name: game_start
 --- !u!1 &4535935944930486402
 GameObject:
   m_ObjectHideFlags: 0
