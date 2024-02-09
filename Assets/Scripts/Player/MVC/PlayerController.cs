@@ -4,14 +4,15 @@ using UnityEngine;
 public enum TypeOfController
 {
     DragMove,
-    TouchToGo,
-    MoveWASD,
+    Joystick,
     NoControls
 }
 
 public class PlayerController
 {
     private Transform _playerTransform;
+    private readonly Rigidbody _rigidbody;
+    private readonly FixedJoystick _fixedJoystick;
     private DragFingerMove _dragFingerMove;
 
     private Action _ArtificialUpdate;
@@ -26,20 +27,31 @@ public class PlayerController
     float _maxClampX; 
 
     float _minClampY; 
-    float _maxClampY; 
-    
-    public PlayerController(Transform playerTransform,float minClampX, float maxClampX, float minClampY, float maxClampY)
+    float _maxClampY;
+    private float _moveSpeed;
+    private float _normalMoveSpeed;
+    private bool isUsingJoystick;
+
+    public PlayerController(Transform playerTransform, Rigidbody rigidbody, FixedJoystick fixedJoystick,float minClampX, float maxClampX, float minClampY, float maxClampY, 
+        float moveSpeed)
     {
         _playerTransform = playerTransform;
+        _rigidbody = rigidbody;
+        _fixedJoystick = fixedJoystick;
         _minClampX = minClampX;
         _maxClampX = maxClampX;
         _minClampY = minClampY;
         _maxClampY = maxClampY;
+        _moveSpeed = moveSpeed;
     }
 
     
     public void OnAwake()
     {
+        
+        EventManager.Suscribe("ChangeController", ChangeController);
+        _normalMoveSpeed = _moveSpeed;
+        
 #if UNITY_EDITOR
         
         _ArtificialUpdate = MoveWASDController;
@@ -68,30 +80,37 @@ public class PlayerController
         ClampPositions();
     }
 
-    public void ChangeController(TypeOfController typeOfController)
+    public void ChangeController(params object[] parameters)
     {
+        var typeOfController = (TypeOfController)parameters[0];
+        
         switch(typeOfController)
         {
             case TypeOfController.DragMove:
+                isUsingJoystick = false;
                 _ArtificialUpdate = DragMove;
                 break;
 
-            case TypeOfController.TouchToGo:
-                _ArtificialUpdate = TouchToGo;
+            case TypeOfController.Joystick:
+                _ArtificialUpdate = () => { };
+                isUsingJoystick = true;
                 break;
             case TypeOfController.NoControls:
                 _ArtificialUpdate = () => { };
+                isUsingJoystick = false;
                 break;
         }
     }
 
-    private void TouchToGo()
+    public void OnFixedUpdate()
     {
-        Debug.Log("Touch To Go");
-    }
-
-    #if UNITY_EDITOR
+        if(!isUsingJoystick) return;
         
+        _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * _moveSpeed, _fixedJoystick.Vertical * _moveSpeed, _rigidbody.velocity.z);
+    }
+    
+    #if UNITY_EDITOR
+    
     private void MoveWASDController()
     {
         var horizontal = Input.GetAxis("Horizontal");
@@ -157,5 +176,10 @@ public class PlayerController
         {
             dragging = false;
         }
+    }
+
+    public void OnDisable()
+    {
+        EventManager.UnSuscribe("ChangeController", ChangeController);
     }
 }

@@ -8,7 +8,7 @@ public class ControllerManager : MonoBehaviour
  
     public void ChangeControl()
     {
-        PlayerModel.instance._playerController.ChangeController(typeOfController);
+        
     }
 
 

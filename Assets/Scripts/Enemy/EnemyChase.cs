@@ -7,7 +7,7 @@ public class EnemyChase : Entity
     public float maxSpeed;
     public float maxForce;
     public float damage;
-    public int probability = 1;
+    public int probabilityToSpawnHealOnDie = 1;
     public HealItem heal;
     public LayerMask enemyLayerMask;
     private int _chance;
@@ -61,7 +61,6 @@ public class EnemyChase : Entity
         if (hittablegameObject != null && other.gameObject.layer != enemyLayerMask && player != null)
         {
             hittablegameObject.TakeDamage(damage);
-            SpawnHeal();
             Die();
         }
     }
@@ -69,12 +68,13 @@ public class EnemyChase : Entity
     public override void Die()
     {
         SoundManager.instance.Play(TypesSFX.Primary, dieSound);
+        SpawnHeal();
         base.Die();
     }
 
     private void SpawnHeal()
     {
-        if ((_chance = Random.Range(0,5)) == probability)
+        if ((_chance = Random.Range(0,5)) == probabilityToSpawnHealOnDie)
             Instantiate(heal, transform.position, Quaternion.identity);
     }
 }

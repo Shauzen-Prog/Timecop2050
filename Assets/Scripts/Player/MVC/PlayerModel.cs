@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerModel : Entity, IObserverPoints
@@ -9,6 +10,11 @@ public class PlayerModel : Entity, IObserverPoints
     public Vector3 offsetPosition;
     public Slider barHealthSlider;
     private Animator _anim;
+    private Rigidbody _rigidbody;
+    
+    [Header("Joystick Variables")]
+    [SerializeField] private FixedJoystick _fixedJoystick;
+    [SerializeField] private float joystickMoveSpeed;
     
     [Header("Clamp Controller Value")]
     public float minClampX; 
@@ -20,7 +26,8 @@ public class PlayerModel : Entity, IObserverPoints
     {
         instance = this;
         _anim = GetComponent<Animator>();
-        _playerController = new PlayerController(transform ,minClampX, maxClampX, minClampY, maxClampY);
+        _rigidbody = GetComponent<Rigidbody>();
+        _playerController = new PlayerController(transform ,_rigidbody ,_fixedJoystick ,minClampX, maxClampX, minClampY, maxClampY ,joystickMoveSpeed);
         _playerView = new PlayerView(transform, barHealthSlider, offsetPosition, _anim, actualHealth, maxHealth);
         
         _playerController.OnAwake();
@@ -51,7 +58,12 @@ public class PlayerModel : Entity, IObserverPoints
         }
 #endif
     }
-    
+
+    private void FixedUpdate()
+    {
+        _playerController.OnFixedUpdate();
+    }
+
     public override void Die()
     {
         gameObject.SetActive(false);
@@ -96,5 +108,10 @@ public class PlayerModel : Entity, IObserverPoints
     public Transform GetTransform()
     {
         return transform;
+    }
+
+    public void OnDisable()
+    {
+        _playerController.OnDisable();
     }
 }

@@ -11,6 +11,7 @@ public class ASyncLoader : MonoBehaviour
     [Header("If Need Pass To Next Level")] 
     public bool isOnLevelCompleted;
     public bool isOnLoseLevel;
+    public bool isBackToMainMenu;
     
     [Header("Menu Screens")]
     [SerializeField] private GameObject loadingScreen;
@@ -38,6 +39,11 @@ public class ASyncLoader : MonoBehaviour
         if (isOnLoseLevel)
         {
             levelToLoad = JsonManager.instance.data.lastScene;
+        }
+
+        if (isBackToMainMenu)
+        {
+            levelToLoad = 0;
         }
         
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelToLoad, LoadSceneMode.Single);

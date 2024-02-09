@@ -48,7 +48,7 @@ public class PowerUpSpawner : MonoBehaviour
                 Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
                 Instantiate(speedUp, _sp.position, _sp.rotation);
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(1f);
                 extrapowerupCount++;
             }
         }
@@ -61,7 +61,7 @@ public class PowerUpSpawner : MonoBehaviour
                 Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
                 Instantiate(damageUp, _sp.position, _sp.rotation);
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(1f);
                 extrapowerupCount++;
             }
         }
@@ -73,7 +73,7 @@ public class PowerUpSpawner : MonoBehaviour
             Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
             Instantiate(powerUps[random], _sp.position, _sp.rotation);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(10f);
             powerUpCount++;
         }
     }
