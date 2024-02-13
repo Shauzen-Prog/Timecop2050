@@ -5,6 +5,7 @@ public abstract class Weapon : MonoBehaviour
 {
     public GenericBullet bullet;
     protected Pool<GenericBullet> pool;
+    protected PoolAdapter<GenericBullet> _poolAdapter;
     public int startingBullets = 2;
     public float time = 1f;
     public float repeatRate = 0.5f;
@@ -13,6 +14,7 @@ public abstract class Weapon : MonoBehaviour
     public virtual void Start()
     {
         pool = new Pool<GenericBullet>(Factory, GenericBullet.Disable, GenericBullet.Active, startingBullets);
+        //_poolAdapter = new PoolAdapter<GenericBullet>(bullet, startingBullets);
         InvokeRepeating(shootingNameOnString, time, repeatRate);
     }
 
@@ -23,6 +25,7 @@ public abstract class Weapon : MonoBehaviour
     public virtual void Shooting()
     {
         GenericBullet instantiatedBullet = pool.AcquireObj();
+        //var a = _poolAdapter.AcquireObj();
         SetPositionAndRotationOfThisBullet(instantiatedBullet);
     }
 
