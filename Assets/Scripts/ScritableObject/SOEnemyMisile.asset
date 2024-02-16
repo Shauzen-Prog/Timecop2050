@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca88778320adb4e4c976fa2ca2f5118d, type: 3}
+  m_Name: SOEnemyMisile
+  m_EditorClassIdentifier: 
+  maxHealth: 2
+  maxSpeed: 2
+  maxForce: 2
+  damage: 20
+  probabilityToSpawnHealOnDie: 1
+  heal: {fileID: -1627794513410379614, guid: f6ee85864e9c6f744a75834c48e27c44, type: 3}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  chance: 4
+  movementSound: {fileID: 8300000, guid: 09d2fcb830f7d9340aeb30be6bc05e7a, type: 3}
+  dieSound: {fileID: 8300000, guid: fd3049aa7f8c54c4c8d203f51cb0f854, type: 3}

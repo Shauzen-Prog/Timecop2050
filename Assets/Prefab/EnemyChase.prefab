@@ -57,6 +57,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +83,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1515437306884231003
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -108,10 +111,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   actualHealth: 2
+  basicEnemySO: {fileID: 11400000, guid: 156d281fd69f47d4a80223e16141c2ef, type: 2}
   maxSpeed: 15
   maxForce: 0.03
   damage: 20
-  probability: 1
+  probabilityToSpawnHealOnDie: 1
   heal: {fileID: -1627794513410379614, guid: f6ee85864e9c6f744a75834c48e27c44, type: 3}
   enemyLayerMask:
     serializedVersion: 2

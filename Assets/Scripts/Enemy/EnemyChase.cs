@@ -2,24 +2,16 @@
 
 public class EnemyChase : Entity
 {
+    public EnemyFlyweightSO basicEnemySO;
+    
     private Vector3 _velocity;
     private Transform _target;
-    public float maxSpeed;
-    public float maxForce;
-    public float damage;
-    public int probabilityToSpawnHealOnDie = 1;
-    public HealItem heal;
-    public LayerMask enemyLayerMask;
-    private int _chance;
-
-    public AudioClip movementSound;
-    public AudioClip dieSound;
-
-    // Update is called once per frame
-
+    
     private void Start()
     {
-        SoundManager.instance.Play(TypesSFX.Second, movementSound);
+        maxHealth = basicEnemySO.maxHealth;
+        
+        SoundManager.instance.Play(TypesSFX.Second, basicEnemySO.movementSound);
         SoundManager.instance.ChangeVolumeAllSounds(0.1f);
     }
     private void Update()
@@ -33,10 +25,10 @@ public class EnemyChase : Entity
         _target = PlayerModel.instance.GetTransform();
         var desired = _target.transform.position - transform.position;
         desired.Normalize();
-        desired *= maxSpeed;
+        desired *= basicEnemySO.maxSpeed;
 
         var steering = desired - _velocity;
-        steering = Vector3.ClampMagnitude(steering, maxForce);
+        steering = Vector3.ClampMagnitude(steering, basicEnemySO.maxForce);
 
         return steering;
     }
@@ -44,7 +36,7 @@ public class EnemyChase : Entity
     private void ApplyForce(Vector3 force)
     {
         _velocity += force;
-        _velocity = Vector3.ClampMagnitude(_velocity + force, maxSpeed);
+        _velocity = Vector3.ClampMagnitude(_velocity + force, basicEnemySO.maxSpeed);
     }
 
     private void MoveToPosition()
@@ -55,27 +47,27 @@ public class EnemyChase : Entity
 
     private void OnTriggerEnter(Collider other)
     {
-        var hittablegameObject = other.GetComponent<IHittable>();
+        var hittableGameObject = other.GetComponent<IHittable>();
         var player = other.GetComponent<PlayerModel>();
         
-        if (hittablegameObject != null && other.gameObject.layer != enemyLayerMask && player != null)
+        if (hittableGameObject != null && other.gameObject.layer != basicEnemySO.enemyLayerMask && player != null)
         {
-            hittablegameObject.TakeDamage(damage);
+            hittableGameObject.TakeDamage(basicEnemySO.damage);
             Die();
         }
     }
 
     public override void Die()
     {
-        SoundManager.instance.Play(TypesSFX.Primary, dieSound);
+        SoundManager.instance.Play(TypesSFX.Primary, basicEnemySO.dieSound);
         SpawnHeal();
         base.Die();
     }
 
     private void SpawnHeal()
     {
-        if ((_chance = Random.Range(0,5)) == probabilityToSpawnHealOnDie)
-            Instantiate(heal, transform.position, Quaternion.identity);
+        if ((basicEnemySO.chance = Random.Range(0,5)) == basicEnemySO.probabilityToSpawnHealOnDie)
+            Instantiate(basicEnemySO.heal, transform.position, Quaternion.identity);
     }
 }
 
