@@ -8,7 +8,7 @@ public class Pause : MonoBehaviour
 
     [SerializeField] private GameObject changeControllerMenu;
     public GameObject pauseBackgroundImage;
-    private bool isPauseMenuActive;
+    public bool isPauseMenuActive;
 
     private bool isJoystickController;
     //public AudioSource music;
@@ -29,13 +29,19 @@ public class Pause : MonoBehaviour
         
     }
 
+    public void PauseMenuButton()
+    {
+        isPauseMenuActive = !isPauseMenuActive;
+        PauseGame(isPauseMenuActive);
+    }
+
     public void PauseGame(bool status)
     {
         if (status)
         {
             pauseMenu.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             Time.timeScale = 0;
-            pauseBackgroundImage.SetActive(true);   
+            pauseBackgroundImage.SetActive(true);
         }
         else
         {

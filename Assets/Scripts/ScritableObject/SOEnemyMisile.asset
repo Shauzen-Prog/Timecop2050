@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SOEnemyMisile
   m_EditorClassIdentifier: 
   maxHealth: 2
-  maxSpeed: 2
+  maxSpeed: 15
   maxForce: 2
   damage: 20
   probabilityToSpawnHealOnDie: 1
@@ -21,6 +21,6 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  chance: 4
+  chance: 2
   movementSound: {fileID: 8300000, guid: 09d2fcb830f7d9340aeb30be6bc05e7a, type: 3}
   dieSound: {fileID: 8300000, guid: fd3049aa7f8c54c4c8d203f51cb0f854, type: 3}

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour, IHittable
 {
-    protected float maxHealth;
-    protected float actualHealth;
+    public float maxHealth;
+    public float actualHealth;
     
     private void Start()
     {

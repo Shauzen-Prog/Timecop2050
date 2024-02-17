@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EOPowerUpConfig
   m_EditorClassIdentifier: 
   _powerUps:
-  - {fileID: 1291087023600136077, guid: 6d8732024d3289a4aa31189d60b44620, type: 3}
-  - {fileID: 5010181901438977911, guid: 312a5ed015e90f54f8540d7e8f1e56aa, type: 3}
+  - {fileID: 8579105741908876242, guid: aa04bfb73509c2f4ba2ab08edb09df28, type: 3}
+  - {fileID: 8209599731651324081, guid: 59dbef696c45b2f49954b8342c9bcae8, type: 3}
