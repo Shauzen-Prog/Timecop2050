@@ -32,6 +32,7 @@ public class Pause : MonoBehaviour
     public void PauseMenuButton()
     {
         isPauseMenuActive = !isPauseMenuActive;
+        changeControllerMenu.transform.localScale = new Vector3(0, 0, 0);
         PauseGame(isPauseMenuActive);
     }
 
