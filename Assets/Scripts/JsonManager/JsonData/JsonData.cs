@@ -19,4 +19,6 @@ public class JsonData
     public int randomPowerUpActive;
 
     public string startingPowerUp;
+
+    public TypeOfController typeOfController;
 }

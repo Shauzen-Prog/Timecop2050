@@ -10,6 +10,7 @@ public class BossModel : Entity
     [SerializeField] private Vector3 _offsetPosition;
     private BossModelView _bossModelView;
     private BossController _bossController;
+    [SerializeField] private BulletHellWeapon bulletHellWeapon;
 
     public Transform[] waypoints;
     private Rigidbody _rb;
@@ -59,6 +60,7 @@ public class BossModel : Entity
         if (!(actualHealth <= 0)) return;
         
         EventManager.Trigger("TriggerAnimBoss", "Die");
+        bulletHellWeapon.canShoot = false;
     }
 
     public override void Heal(float healAmount)

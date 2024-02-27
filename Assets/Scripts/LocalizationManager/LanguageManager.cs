@@ -11,7 +11,7 @@ public class LanguageManager : MonoBehaviour
 
     public bool isReadyToTranslate;
     public Language selectedLanguage;
-    public string externalURL = "https://drive.google.com/uc?export=download&id=129WPbJmgUOntUDbvwH1BE23rccIrG_b7";
+    public string externalURL = "https://drive.google.com/uc?export=download&id=1y5ErPPMOHxF-sdoDPsf_xWf9eXHK3GJZ";
 
     Dictionary<Language, Dictionary<string, string>> _languageManager;
 
@@ -61,7 +61,7 @@ public class LanguageManager : MonoBehaviour
         yield return www.SendWebRequest();
 
         _languageManager = LanguageU.LoadCodex(www.downloadHandler.text);
-
+        
         isReadyToTranslate = true;
         OnUpdate?.Invoke();
 

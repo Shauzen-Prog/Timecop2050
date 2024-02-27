@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -83,7 +84,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -147,6 +148,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -155,7 +158,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
@@ -191,7 +194,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1238949376676248711}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -17.999994, y: 90.00001, z: -90}
+  m_LocalEulerAnglesHint: {x: 53.99997, y: 90, z: -90}
 --- !u!33 &1238949376673381539
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -214,6 +217,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -238,6 +243,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1238949376676405415
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +310,7 @@ MonoBehaviour:
   actualHealth: 100
   anim: {fileID: 162612770273158579}
   bossSlider: {fileID: 133533867336828713}
-  offsetPosition: {x: 0, y: 0, z: 0}
+  _offsetPosition: {x: 0, y: 0, z: 0}
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -394,12 +400,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 8594875309278013875, guid: 81419c1aafe25c64787d3311210d2378, type: 3}
-  startingBullets: 0
+  startingBullets: 10
   time: 1
   repeatRate: 3
   bulletsAmount: 10
-  startAngle: 90
+  startAngle: 1000
   endAngle: 270
+  startingAngles:
+  - 90
+  - 60
+  - 1000
+  - 1500
 --- !u!1 &7609641196707931943
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +472,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -556,6 +569,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2950377887952510513
 MonoBehaviour:
   m_ObjectHideFlags: 0

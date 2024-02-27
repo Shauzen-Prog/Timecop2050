@@ -2,6 +2,7 @@
 
 public class EnemyBullet : GenericBullet
 {
+
     public override void OnTriggerEnter(Collider other)
     {
         var hittableGameObject = other.GetComponent<IHittable>();

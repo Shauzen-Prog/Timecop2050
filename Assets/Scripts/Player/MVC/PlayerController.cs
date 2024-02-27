@@ -60,10 +60,10 @@ public class PlayerController
         //_ArtificialUpdate = DragMove;
         ChangeController(TypeOfController.DragMove);
 #endif
-   
-        
         
     }
+    
+    
     
     Vector3 ClampPositions()
     {
