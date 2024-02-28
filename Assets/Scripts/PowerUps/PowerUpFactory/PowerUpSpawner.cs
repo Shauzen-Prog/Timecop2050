@@ -22,6 +22,8 @@ public class PowerUpSpawner : MonoBehaviour
     public int powerUpCount;
     
     public int extrapowerupCount;
+
+    public bool noPowerUp;
     private void Awake()
     {
         _powerUpFactory = new PowerUpFactory(Instantiate(_powerUpConfiguration));
@@ -65,9 +67,10 @@ public class PowerUpSpawner : MonoBehaviour
                 extrapowerupCount++;
             }
         }
-
+        
         while (powerUpCount < 20)
         {
+            if(noPowerUp) break;
             random = 0;
             random = Random.Range(0, powerUps.Count);
             Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];

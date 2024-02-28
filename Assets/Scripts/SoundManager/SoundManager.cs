@@ -33,12 +33,17 @@ public class SoundManager : MonoBehaviour
             item.Value.Stop();
         }
     }
-
+    
     public void ChangeVolumeAllSounds(float volume)
     {
         foreach (var item in _audios)
         {
             item.Value.volume = volume;
         }
+    }
+
+    public void ChangeVolumeToSpecificSound(TypesSFX typesSfx, float volume)
+    {
+        _audios[typesSfx].volume = volume;
     }
 }

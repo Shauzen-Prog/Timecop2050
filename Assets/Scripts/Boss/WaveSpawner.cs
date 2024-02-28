@@ -109,7 +109,7 @@ public class WaveSpawner : MonoBehaviour
                 JsonManager.instance.data.completeLevel[levelCompleteIndex] = true;
 
 
-                SceneManagement.instance.LoadScene(4);
+                ASyncLoader.instance.PassLevel();
             }
         }
         else nextWave++;

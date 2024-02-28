@@ -3,14 +3,17 @@
 public class EnemyChase : Entity
 {
     public EnemyFlyweightSO basicEnemySO;
-    
+
+    private Animator _animator;
     private Vector3 _velocity;
     private Transform _target;
+    
     
     private void Start()
     {
         maxHealth = basicEnemySO.maxHealth;
         
+        _animator = GetComponent<Animator>();
         SoundManager.instance.Play(TypesSFX.Second, basicEnemySO.movementSound);
         SoundManager.instance.ChangeVolumeAllSounds(0.1f);
     }
@@ -57,8 +60,15 @@ public class EnemyChase : Entity
         }
     }
 
+    public void ExplosionEnable()
+    {
+        Instantiate(basicEnemySO.explotionGO, transform.position, transform.rotation);
+    }
+    
     public override void Die()
     {
+        _animator.SetTrigger("Die");
+        ExplosionEnable();
         SoundManager.instance.Play(TypesSFX.Primary, basicEnemySO.dieSound);
         SpawnHeal();
         base.Die();

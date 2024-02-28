@@ -107,14 +107,20 @@ public class LoadInterstitialAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAd
     {
         if(showResult == ShowResult.Finished)
         {
-            //Si se ve el Ad
-            loseMenuManager?.WatchAdFinished();
+            if (loseMenuManager != null)
+                loseMenuManager.WatchAdFinished();
+            else
+                GameObject.FindGameObjectWithTag("Menu");
+            
             JsonManager.instance.data.activeAllMenuPowerUps = true;
         }
         else if (showResult == ShowResult.Skipped)
         {
             //Si se saltea el Ad
-            loseMenuManager?.WatchAdFinished();
+            if(loseMenuManager != null)
+                loseMenuManager.WatchAdFinished();
+            else
+                GameObject.FindGameObjectWithTag("Menu");
 
             var randomPowerUp = Random.Range(1, 4);
 

@@ -24,3 +24,5 @@ MonoBehaviour:
   chance: 2
   movementSound: {fileID: 8300000, guid: 09d2fcb830f7d9340aeb30be6bc05e7a, type: 3}
   dieSound: {fileID: 8300000, guid: fd3049aa7f8c54c4c8d203f51cb0f854, type: 3}
+  explotionGO: {fileID: 4845159470714101940, guid: 87859ec32c864f04bb39322c61ac8b68,
+    type: 3}

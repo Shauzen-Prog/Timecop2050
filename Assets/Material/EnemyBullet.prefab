@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8347113514184251847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7516343, y: 0.7516343, z: 0.7516343}
+  m_LocalScale: {x: 0.046858855, y: 0.046858855, z: 0.046858855}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8347113514184251847}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 7628355549859089368, guid: c45060e083fa06c4abd7b7cc10d1c334, type: 3}
 --- !u!23 &4421049000733711037
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 28.84
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8594875309278013875
 MonoBehaviour:
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1ee5d6ae9c3474787bd77dfc652c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDamage: 10
+  bulletDamage: 15
   bulletMaxDuration: 3.5
   speed: 15
   bulletDirection: {x: 0, y: -1, z: 0}

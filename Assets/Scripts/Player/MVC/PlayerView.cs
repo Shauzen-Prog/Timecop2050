@@ -7,17 +7,15 @@ public class PlayerView
     Transform _playerTransform;
     Slider _sliderBar;
     Vector3 _offSetPosition;
-    private Animator _anim;
     private readonly float _maxHealth;
     private readonly float _actualHealth;
 
-    public PlayerView(Transform playerTransform, Slider healthBarSlider, Vector3 offsetPosition, Animator anim, 
+    public PlayerView(Transform playerTransform, Slider healthBarSlider, Vector3 offsetPosition, 
         float actualHealth, float maxHealth)
     {
         _playerTransform = playerTransform;
         _sliderBar = healthBarSlider;
         _offSetPosition = offsetPosition;
-        _anim = anim;
         _actualHealth = actualHealth;
         _maxHealth = maxHealth;
     }
@@ -25,7 +23,6 @@ public class PlayerView
     {
         //_sliderBar.transform.position = _offSetPosition;
         EventManager.Suscribe("ChangeHealthPlayer", UpdateHealBar);
-        EventManager.Suscribe("TriggerAnimPlayer", TriggerAnim);
         _sliderBar.gameObject.SetActive(true);
         _sliderBar.value = _maxHealth;
     }
@@ -42,11 +39,6 @@ public class PlayerView
         _sliderBar.value = health / 100f;
     }
     
-    private void TriggerAnim(params object[] parameters)
-    {
-        var triggerAnim = (string)parameters[0];
-        
-        _anim.SetTrigger(triggerAnim);
-    }
+   
     
 }

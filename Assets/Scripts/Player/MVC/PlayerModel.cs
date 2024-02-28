@@ -28,7 +28,7 @@ public class PlayerModel : Entity, IObserverPoints
         _anim = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _playerController = new PlayerController(transform ,_rigidbody ,_fixedJoystick ,minClampX, maxClampX, minClampY, maxClampY ,joystickMoveSpeed);
-        _playerView = new PlayerView(transform, barHealthSlider, offsetPosition, _anim, actualHealth, maxHealth);
+        _playerView = new PlayerView(transform, barHealthSlider, offsetPosition, actualHealth, maxHealth);
         
         _playerController.OnAwake();
     }
@@ -69,7 +69,7 @@ public class PlayerModel : Entity, IObserverPoints
         gameObject.SetActive(false);
         JsonManager.instance.data.lastScene = SceneManagement.ReturnThisSceneIndex();
         JsonManager.instance.Save();
-        SceneManagement.instance.LoadScene(5);
+        ASyncLoader.instance.LoseLevel();
     }
 
     public override void TakeDamage(float dmg)
@@ -79,11 +79,8 @@ public class PlayerModel : Entity, IObserverPoints
         actualHealth -= dmg;
         
         EventManager.Trigger("ChangeHealthPlayer", actualHealth);
-        EventManager.Trigger("TriggerAnimPlayer", "TakeDamage");
         
         if (!(actualHealth <= 0)) return;
-        
-        EventManager.Trigger("TriggerAnimPlayer", "Die");
         Die();
     }
 

@@ -6,14 +6,15 @@ using UnityEngine;
 public class EnemyFlyweightSO : ScriptableObject
 {
     public float maxHealth;
-    
     public float maxSpeed;
     public float maxForce;
     public float damage;
+    public float damageIfHitCollisionArea = 10f;
     public int probabilityToSpawnHealOnDie = 1;
     public HealItem heal;
     public LayerMask enemyLayerMask;
     public int chance;
     public AudioClip movementSound;
     public AudioClip dieSound;
+    public GameObject explotionGO;
 }

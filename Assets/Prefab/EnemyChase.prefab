@@ -111,17 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   actualHealth: 2
-  basicEnemySO: {fileID: 11400000, guid: 156d281fd69f47d4a80223e16141c2ef, type: 2}
-  maxSpeed: 15
-  maxForce: 0.03
-  damage: 20
-  probabilityToSpawnHealOnDie: 1
-  heal: {fileID: -1627794513410379614, guid: f6ee85864e9c6f744a75834c48e27c44, type: 3}
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  movementSound: {fileID: 8300000, guid: 09d2fcb830f7d9340aeb30be6bc05e7a, type: 3}
-  dieSound: {fileID: 8300000, guid: fd3049aa7f8c54c4c8d203f51cb0f854, type: 3}
+  basicEnemySO: {fileID: 11400000, guid: a1d49f873c101b24993e8124ea328e37, type: 2}
 --- !u!95 &6425801247563153046
 Animator:
   serializedVersion: 3
@@ -132,7 +122,7 @@ Animator:
   m_GameObject: {fileID: 1515437306884231001}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51877b10adc9ee34498ca85f9c0bb3be, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -57,10 +57,12 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c8437850cb8a47943b62fecb51cd6322, type: 2}
+  - {fileID: 2100000, guid: 7d8541f44a70c4f4da7500dd62144b04, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,6 +83,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &7581293538085337608
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -125,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b1752485308d746b728566023d6e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movements: 02000000
-  speed: 10
-  changeState: 0
+  movements: 0200000003000000
+  EnemyFlyweightSo: {fileID: 11400000, guid: 8c27e1843b3c9f44898690b30ef0ef00, type: 2}
+  changeState: 5
   moveSound: {fileID: 8300000, guid: 09d2fcb830f7d9340aeb30be6bc05e7a, type: 3}
   dieSound: {fileID: 8300000, guid: fd3049aa7f8c54c4c8d203f51cb0f854, type: 3}

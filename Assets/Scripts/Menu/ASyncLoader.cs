@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class ASyncLoader : MonoBehaviour
 {
+    public static ASyncLoader instance;
+    
     [Header("If Need Pass To Next Level")] 
     public bool isOnLevelCompleted;
     public bool isOnLoseLevel;
@@ -19,32 +21,80 @@ public class ASyncLoader : MonoBehaviour
     
     [Header("Slider")]
     [SerializeField] private Slider loadingSlider;
-    
-    public void LoadLevelBtn(int levelToLoad)
+
+    private void Start()
     {
-        mainMenu.SetActive(false);
-        loadingScreen.SetActive(true);
+        if (instance == null)
+            instance = this;
+    }
+
+    public void LevelToLoad(int levelToLoad)
+    {
+        ActiveAndDeactiveMenus();
 
         StartCoroutine(LoadLevelAsync(levelToLoad));
     }
     
+    public void LoadLevelLastScene()
+    {
+        ActiveAndDeactiveMenus();
 
+        StartCoroutine(LoadLevelAsync(JsonManager.instance.data.lastScene));
+    }
+
+    public void PassLevelBtn()
+    {
+        ActiveAndDeactiveMenus();
+        StartCoroutine(LoadLevelAsync(JsonManager.instance.data.sceneToLoad));
+    }
+
+    public void BackToMenuBtn()
+    {
+        ActiveAndDeactiveMenus();
+        StartCoroutine(LoadLevelAsync(0));
+    }
+
+    public void PassLevel()
+    {
+        ActiveAndDeactiveMenus();
+        isOnLevelCompleted = true;
+        StartCoroutine(LoadLevelAsync(4));
+    }
+
+    public void LoseLevel()
+    {
+        ActiveAndDeactiveMenus();
+        isOnLoseLevel = true;
+        var sceneLose = 5;
+        StartCoroutine(LoadLevelAsync(sceneLose));
+    }
+
+    public void ActiveAndDeactiveMenus()
+    {
+        mainMenu.SetActive(false);
+        loadingScreen.SetActive(true);
+    }
+    
     private IEnumerator LoadLevelAsync(int levelToLoad)
     {
-        if (isOnLevelCompleted)
-        {
-            levelToLoad = JsonManager.instance.data.sceneToLoad;
-        }
-
-        if (isOnLoseLevel)
-        {
-            levelToLoad = JsonManager.instance.data.lastScene;
-        }
-
-        if (isBackToMainMenu)
-        {
-            levelToLoad = 0;
-        }
+        if(SoundManager.instance != null)
+            SoundManager.instance.StopAllSounds();
+        
+       // if (isOnLevelCompleted)
+       // {
+       //     levelToLoad = JsonManager.instance.data.sceneToLoad;
+       // }
+//
+       // if (isOnLoseLevel)
+       // {
+       //     levelToLoad = JsonManager.instance.data.lastScene;
+       // }
+//
+       // if (isBackToMainMenu)
+       // {
+       //     levelToLoad = 0;
+       // }
+       // Debug.Log(levelToLoad);
         
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelToLoad, LoadSceneMode.Single);
 

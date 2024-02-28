@@ -76,8 +76,8 @@ public class PlayerController
     
     public void OnUpdate()
     {
-        _ArtificialUpdate();
         ClampPositions();
+        _ArtificialUpdate();
     }
 
     public void ChangeController(params object[] parameters)
@@ -107,6 +107,7 @@ public class PlayerController
         if(!isUsingJoystick) return;
         
         _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * _moveSpeed, _fixedJoystick.Vertical * _moveSpeed, _rigidbody.velocity.z);
+        _playerTransform.localPosition = ClampPositions();
     }
     
     #if UNITY_EDITOR
