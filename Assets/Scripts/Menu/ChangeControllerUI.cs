@@ -1,8 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+public enum TypeOfController
+{
+    DragMove,
+    Joystick,
+    NoControls
+}
 
 public class ChangeControllerUI : MonoBehaviour
 {
@@ -43,4 +47,6 @@ public class ChangeControllerUI : MonoBehaviour
         JoystickButton.interactable = !JoystickButton.interactable;
         DragAndDropButton.interactable = !DragAndDropButton.interactable;
     }
+    
+   
 }

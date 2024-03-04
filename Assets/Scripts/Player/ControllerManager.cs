@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class ControllerManager : MonoBehaviour
 {
-    [SerializeField] private TypeOfController typeOfController;
- 
-    public void ChangeControl()
-    {
-        
-    }
 
 
 }

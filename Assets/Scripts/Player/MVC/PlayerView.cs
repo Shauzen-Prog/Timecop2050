@@ -1,44 +1,39 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerView
+[DefaultExecutionOrder(1)]
+public class PlayerView : MonoBehaviour, IObserver
 {
-    HealthBarBehaviour _healthBar;
-    Transform _playerTransform;
-    Slider _sliderBar;
-    Vector3 _offSetPosition;
-    private readonly float _maxHealth;
-    private readonly float _actualHealth;
-
-    public PlayerView(Transform playerTransform, Slider healthBarSlider, Vector3 offsetPosition, 
-        float actualHealth, float maxHealth)
+    public Slider sliderBar;
+    private IObservable _myModel;
+    public void Start()
     {
-        _playerTransform = playerTransform;
-        _sliderBar = healthBarSlider;
-        _offSetPosition = offsetPosition;
-        _actualHealth = actualHealth;
-        _maxHealth = maxHealth;
-    }
-    public void OnStart()
-    {
-        //_sliderBar.transform.position = _offSetPosition;
-        EventManager.Suscribe("ChangeHealthPlayer", UpdateHealBar);
-        _sliderBar.gameObject.SetActive(true);
-        _sliderBar.value = _maxHealth;
-    }
-
-    public void OnUpdateChangeTransformPosition()
-    {
-        _sliderBar.transform.position = Camera.main.WorldToScreenPoint(_playerTransform.position + _offSetPosition);
-    }
-
-    private void UpdateHealBar(params object[] parameters)
-    {
-        var health = (float)parameters[0];
+        _myModel = GetComponent<Entity>();
+        _myModel.Subscribe(this);
         
-        _sliderBar.value = health / 100f;
+        sliderBar.value = PlayerModel.instance.actualHealth;
     }
     
-   
+    private void UpdateHealBar(float health)
+    {
+        sliderBar.value = health / 100f;
+    }
     
+    public void Notify(EventEnum eventEnum, params object[] parameters)
+    {
+        var healAmount = (float)parameters[0];
+        
+        switch (eventEnum)
+        {
+            case EventEnum.TakeDamage:
+            case EventEnum.Healing:
+                UpdateHealBar(healAmount);
+                break;
+        }
+    }
+
+    private void OnDisable()
+    {
+        _myModel.UnSubscribe(this);
+    }
 }

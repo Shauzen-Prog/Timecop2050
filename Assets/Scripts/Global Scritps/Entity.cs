@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Entity : MonoBehaviour, IHittable
+public abstract class Entity : MonoBehaviour, IHittable, IObservable
 {
     public float maxHealth;
     public float actualHealth;
+    
+    protected List<IObserver> _observers = new List<IObserver>();
     
     private void Start()
     {
@@ -18,7 +21,6 @@ public abstract class Entity : MonoBehaviour, IHittable
         
         if (actualHealth <= 0)
             Die();
-
     }
     
     
@@ -37,5 +39,28 @@ public abstract class Entity : MonoBehaviour, IHittable
     {
         Destroy(gameObject);
     }
-    
+
+    public void Subscribe(IObserver obs)
+    {
+        if (!_observers.Contains(obs))
+        {
+            _observers.Add(obs);
+        }
+    }
+
+    public void UnSubscribe(IObserver obs)
+    {
+        if (_observers.Contains(obs))
+        {
+            _observers.Remove(obs);
+        }
+    }
+
+    public void NotifyToObservers(EventEnum eventEnum, params object[] parameters)
+    {
+        for (int i = 0; i < _observers.Count; i++)
+        {
+            _observers[i].Notify(eventEnum, (float)parameters[0]);
+        }
+    }
 }

@@ -32,9 +32,8 @@ public class BossModel : Entity
     // Start is called before the first frame update
     void Start()
     {
-        var transform1 = transform;
-        _bossModelView = new BossModelView(anim ,transform1, bossSlider, _offsetPosition);
-        _bossController = new BossController(transform1, waypoints, _rb, speed, _curWaypoint, _patrol, _moveDirection, _velocity);
+        _bossModelView = new BossModelView(anim ,transform, bossSlider, _offsetPosition);
+        _bossController = new BossController(transform, waypoints, _rb, speed, _curWaypoint, _patrol, _moveDirection, _velocity);
         
         _bossModelView.OnStart();
         

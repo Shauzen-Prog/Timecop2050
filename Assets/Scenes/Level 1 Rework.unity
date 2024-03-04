@@ -5833,9 +5833,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08777bae4c0f9441bbd21617e30e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barPoints: {fileID: 0}
-  maxChargePoints: 100
-  barDownSpeed: 1.5
 --- !u!4 &1997456520
 Transform:
   m_ObjectHideFlags: 0
@@ -6304,28 +6301,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2185347865503786431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8561650921439893427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ffd307355e74da4da847f5b752e1380, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  actualHealth: 0
-  offsetPosition: {x: 0, y: -5, z: 0}
-  barHealthSlider: {fileID: 2185347866947324692}
-  _fixedJoystick: {fileID: 1159462584}
-  joystickMoveSpeed: 25
-  minClampX: 2.4
-  maxClampX: 28.6
-  minClampY: -28.6
-  maxClampY: 36.9
 --- !u!1 &2185347865835814786
 GameObject:
   m_ObjectHideFlags: 0
@@ -6616,7 +6591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8561650921439893427}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 15.8, y: -29.2, z: -40}
+  m_LocalPosition: {x: 16, y: -29.8, z: -40}
   m_LocalScale: {x: 0.32935894, y: 0.32935894, z: 0.32935894}
   m_Children:
   - {fileID: 5467359121637283515}
@@ -6821,9 +6796,11 @@ GameObject:
   - component: {fileID: 4650602125074949536}
   - component: {fileID: 4454419851985543062}
   - component: {fileID: 7993271595361641327}
+  - component: {fileID: 8561650921439893430}
+  - component: {fileID: 8561650921439893429}
+  - component: {fileID: 8561650921439893428}
   - component: {fileID: 4888303241530556327}
   - component: {fileID: 7530848059216245849}
-  - component: {fileID: 2185347865503786431}
   - component: {fileID: 2185347866224943198}
   m_Layer: 8
   m_Name: Player
@@ -6832,3 +6809,50 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8561650921439893428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561650921439893427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c39e2bee0af12498a4320c9076f4d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderBar: {fileID: 2185347866947324692}
+--- !u!114 &8561650921439893429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561650921439893427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffd307355e74da4da847f5b752e1380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  actualHealth: 0
+  rigidbody: {fileID: 0}
+--- !u!114 &8561650921439893430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8561650921439893427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fba08b0ced4594fac75e8c8cf2b35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixedJoystick: {fileID: 1159462584}
+  minClampX: 2
+  maxClampX: 29.3
+  minClampY: -29.8
+  maxClampY: 38.1
+  wasdMoveSpeed: 20
+  joystickMoveSpeed: 25

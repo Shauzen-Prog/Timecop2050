@@ -1,60 +1,40 @@
 ﻿using System;
 using UnityEngine;
 
-public enum TypeOfController
+[DefaultExecutionOrder(1)]
+public class PlayerController : MonoBehaviour
 {
-    DragMove,
-    Joystick,
-    NoControls
-}
+    private PlayerModel _playerModel;
+    public FixedJoystick fixedJoystick;
 
-public class PlayerController
-{
-    private Transform _playerTransform;
-    private readonly Rigidbody _rigidbody;
-    private readonly FixedJoystick _fixedJoystick;
-    private DragFingerMove _dragFingerMove;
-
-    private Action _ArtificialUpdate;
+    private Action _artificialUpdate;
     
-    [Header("Drag And Move Variables")]
-    private float dist;
-    public static bool dragging = false;
-    private Vector3 offset;
-    private Transform toDrag;
+    private float _dist;
+    private static bool _dragging;
+    private Vector3 _offset;
+    private Transform _toDrag;
 
-    float _minClampX; 
-    float _maxClampX; 
-
-    float _minClampY; 
-    float _maxClampY;
-    private float _moveSpeed;
-    private float _normalMoveSpeed;
-    private bool isUsingJoystick;
-
-    public PlayerController(Transform playerTransform, Rigidbody rigidbody, FixedJoystick fixedJoystick,float minClampX, float maxClampX, float minClampY, float maxClampY, 
-        float moveSpeed)
-    {
-        _playerTransform = playerTransform;
-        _rigidbody = rigidbody;
-        _fixedJoystick = fixedJoystick;
-        _minClampX = minClampX;
-        _maxClampX = maxClampX;
-        _minClampY = minClampY;
-        _maxClampY = maxClampY;
-        _moveSpeed = moveSpeed;
-    }
-
+    [Header("Clamp To Map Size Parameters")]
+    public float minClampX;
+    public float maxClampX;
+    public float minClampY;
+    public float maxClampY;
+    private const float StaticClampZ = -40f;
     
-    public void OnAwake()
+    private Camera _camera;
+
+    [Header("Controllers Speed")] 
+    public float wasdMoveSpeed = 20f;
+    public float joystickMoveSpeed = 25f;
+    
+
+    private void Awake()
     {
-        
-        EventManager.Suscribe("ChangeController", ChangeController);
-        _normalMoveSpeed = _moveSpeed;
+        _playerModel = GetComponent<PlayerModel>();
         
 #if UNITY_EDITOR
         
-        _ArtificialUpdate = MoveWASDController;
+        _artificialUpdate = MoveWasdController;
         
 #elif UNITY_ANDROID
         //_ArtificialUpdate = DragMove;
@@ -63,121 +43,112 @@ public class PlayerController
         
     }
     
-    
-    
-    Vector3 ClampPositions()
+    private void Start()
     {
-        float clampPositionX = Mathf.Clamp(_playerTransform.position.x, _minClampX, _maxClampX);
-        float clampPositionY = Mathf.Clamp(_playerTransform.position.y, _minClampY, _maxClampY);
-        Vector3 clampPositionVector = new Vector3(clampPositionX, clampPositionY, -40f);
+        _camera = Camera.main;
+    }
+    
+    private Vector3 ClampPositions()
+    {
+        var position = _playerModel.transform.position;
+        var clampPositionX = Mathf.Clamp(position.x, minClampX, maxClampX);
+        var clampPositionY = Mathf.Clamp(position.y, minClampY, maxClampY);
+        var clampPositionVector = new Vector3(clampPositionX, clampPositionY, StaticClampZ);
         return clampPositionVector;
     }
-
     
-    public void OnUpdate()
+    public void Update()
     {
-        ClampPositions();
-        _ArtificialUpdate();
+        _playerModel.transform.localPosition = ClampPositions();
+        _artificialUpdate();
     }
 
-    public void ChangeController(params object[] parameters)
+    private void ChangeController(params object[] parameters)
     {
         var typeOfController = (TypeOfController)parameters[0];
         
         switch(typeOfController)
         {
             case TypeOfController.DragMove:
-                isUsingJoystick = false;
-                _ArtificialUpdate = DragMove;
+                _artificialUpdate = DragMove;
                 break;
-
             case TypeOfController.Joystick:
-                _ArtificialUpdate = () => { };
-                isUsingJoystick = true;
+                _artificialUpdate = UseJoystick;
                 break;
             case TypeOfController.NoControls:
-                _ArtificialUpdate = () => { };
-                isUsingJoystick = false;
+                _artificialUpdate = () => { };
                 break;
         }
     }
 
-    public void OnFixedUpdate()
+    private void UseJoystick()
     {
-        if(!isUsingJoystick) return;
-        
-        _rigidbody.velocity = new Vector3(_fixedJoystick.Horizontal * _moveSpeed, _fixedJoystick.Vertical * _moveSpeed, _rigidbody.velocity.z);
-        _playerTransform.localPosition = ClampPositions();
+        _playerModel.rigidbody.velocity = new Vector3(fixedJoystick.Horizontal * joystickMoveSpeed,
+            fixedJoystick.Vertical * joystickMoveSpeed, _playerModel.rigidbody.velocity.z);
     }
     
     #if UNITY_EDITOR
     
-    private void MoveWASDController()
+    private void MoveWasdController()
     {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
-        
-        var _moveVector = new Vector3(horizontal, vertical, 0);
-        
-        _playerTransform.position += _moveVector * (20 * Time.deltaTime);
-        
+
+        var moveVector = new Vector3(horizontal, vertical, 0);
+
+        _playerModel.transform.position += moveVector * (wasdMoveSpeed * Time.deltaTime);
     }
         
     #endif
-    
-  
 
-    public void DragMove()
+    #if UNITY_ANDROID
+    private void DragMove()
     {
-        _playerTransform.localPosition = ClampPositions();
+        _playerModel.transform.localPosition = ClampPositions();
 
         Vector3 v3;
-
-        // Can use Input.touchCount == 0 for slow time with Time.ScaleTime
-
+        
         if (Input.touchCount != 1)
         {
-            //Time.timeScale = 0.3f; De esta manera funciona
-            dragging = false;
+            _dragging = false;
             return;
         }
 
-        //Time.timeScale = 1f; implementar con eventos
-
-        Touch touch = Input.touches[0];
+        var touch = Input.touches[0];
         Vector3 pos = touch.position;
 
         if (touch.phase == TouchPhase.Began)
         {
-            Ray ray = Camera.main.ScreenPointToRay(pos);
+            var ray = _camera.ScreenPointToRay(pos);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.gameObject.layer == 8)
                 {
-                    toDrag = hit.transform;
-                    dist = hit.transform.position.z - Camera.main.transform.position.z;
-                    v3 = new Vector3(pos.x, pos.y, dist);
-                    v3 = Camera.main.ScreenToWorldPoint(v3);
-                    offset = toDrag.position - v3;
-                    dragging = true;
+                    _toDrag = hit.transform;
+                    _dist = hit.transform.position.z - _camera.transform.position.z;
+                    v3 = new Vector3(pos.x, pos.y, _dist);
+                    v3 = _camera.ScreenToWorldPoint(v3);
+                    _offset = _toDrag.position - v3;
+                    _dragging = true;
                 }
             }
         }
 
-        if (dragging && touch.phase == TouchPhase.Moved)
+        if (_dragging && touch.phase == TouchPhase.Moved)
         {
-            v3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, dist);
-            v3 = Camera.main.ScreenToWorldPoint(v3);
-            toDrag.position = v3 + offset;
+            v3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, _dist);
+            v3 = _camera.ScreenToWorldPoint(v3);
+            _toDrag.position = v3 + _offset;
         }
 
-        if (dragging && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
+        if (_dragging && (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled))
         {
-            dragging = false;
+            _dragging = false;
         }
     }
+    #endif
 
     public void OnDisable()
     {
