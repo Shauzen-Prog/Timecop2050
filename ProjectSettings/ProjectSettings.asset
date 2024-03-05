@@ -748,11 +748,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Template3D
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: E:\Unity Games\Timecop2050\Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: alESCGames
+  metroCertificateIssuer: alESCGames
+  metroCertificateNotAfter: 00c194d7118edb01
   metroApplicationDescription: Template_3D
   wsaImages: {}
   metroTileShortName: Timecop2050

@@ -6,6 +6,7 @@ public class PlayerView : MonoBehaviour, IObserver
 {
     public Slider sliderBar;
     private IObservable _myModel;
+    
     public void Start()
     {
         _myModel = GetComponent<Entity>();

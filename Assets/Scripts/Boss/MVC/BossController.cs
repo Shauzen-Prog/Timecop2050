@@ -1,57 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class BossController
+public class BossController : MonoBehaviour,IObserver
 {
-    private Transform _myTransform;
-    private Transform[] _waypoints;
-    private Rigidbody _rb;
-    float _speed;
-    int _curWaypoint;
-    bool _patrol = true;
-    private Vector3 _target;
-    Vector3 _moveDirection;
-    Vector3 _velocity;
+    private BossModel _bossModel;
+    public BulletHellWeapon bulletHellWeapon;
+    
+    public Transform[] waypoints;
 
-    public BossController(Transform myTransform ,Transform[] waypoints, Rigidbody rb, float speed,
-        int curWaypoint, bool patrol, Vector3 moveDirection, Vector3 velocity)
+    public float speed;
+    private int _curWaypoint;
+    private readonly bool _patrol = true;
+    private Vector3 _target;
+    private Vector3 _moveDirection;
+    private Vector3 _velocity;
+
+    private Action _artificialUpdate;
+    private const bool NoAbleToShoot = false;
+    
+    private IObservable _myModel;
+    
+    private void Start()
     {
-        _myTransform = myTransform;
-        _waypoints = waypoints;
-        _rb = rb;
-        _speed = speed;
-        _curWaypoint = curWaypoint;
-        _patrol = patrol;
-        _moveDirection = moveDirection;
-        _velocity = velocity;
+        _myModel = GetComponent<Entity>();
+        _bossModel = GetComponent<BossModel>();
+        _myModel.Subscribe(this);
+        _artificialUpdate = MoveBoss;
     }
 
-    public void UpdateController()
+    public void Update()
     {
-        if (_curWaypoint < _waypoints.Length)
+        _artificialUpdate();
+    }
+
+    private void MoveBoss()
+    {
+        if (_curWaypoint < waypoints.Length)
         {
-            _target = _waypoints[_curWaypoint].position;
-            _moveDirection = _target - _myTransform.position;
-            _velocity = _rb.velocity;
-
-
+            _target = waypoints[_curWaypoint].position;
+            _moveDirection = _target - _bossModel.transform.position;
+            _velocity = _bossModel.rigidbody.velocity;
+            
             if (_moveDirection.magnitude < 1)
             {
-                var beforeWaypoint = _curWaypoint;
-                _curWaypoint = Random.Range(0, _waypoints.Length);
-                if(beforeWaypoint < _curWaypoint)
-                {
-                    //se mueve a la izquierda 
-                }
-                if (beforeWaypoint > _curWaypoint)
-                {
-                    //se mueve a la der
-                }
+                _curWaypoint = Random.Range(0, waypoints.Length);
             }
             else
             {
-                _velocity = _moveDirection.normalized * _speed;
+                _velocity = _moveDirection.normalized * speed;
             }
         }
         else
@@ -65,7 +62,20 @@ public class BossController
                 _velocity = Vector3.zero;
             }
         }
-        _rb.velocity = _velocity;
+        _bossModel.rigidbody.velocity = _velocity;
+    }
+
+    public void Notify(EventEnum eventEnum, params object[] parameters)
+    {
+        if (eventEnum == EventEnum.Death)
+        {
+            bulletHellWeapon.canShoot = NoAbleToShoot;
+        }
+    }
+
+    private void OnDisable()
+    {
+        _myModel.UnSubscribe(this);
     }
 }
 

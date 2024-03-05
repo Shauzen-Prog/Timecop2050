@@ -58,7 +58,7 @@ public abstract class Entity : MonoBehaviour, IHittable, IObservable
 
     public void NotifyToObservers(EventEnum eventEnum, params object[] parameters)
     {
-        for (int i = 0; i < _observers.Count; i++)
+        for (var i = 0; i < _observers.Count; i++)
         {
             _observers[i].Notify(eventEnum, (float)parameters[0]);
         }
